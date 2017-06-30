@@ -5,12 +5,12 @@ using UnityEngine;
 public class Map : MonoBehaviour {
 
 	
-    public static bool canPass()
+    public bool canPass(int x, int y)
     {
         return true;
     }
 
-    public static bool canSee()
+	public bool canSee(int x, int y)
     {
         return true;
     }
