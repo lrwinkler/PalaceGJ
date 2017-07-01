@@ -49,33 +49,57 @@ public class PlayerMovement : MonoBehaviour
         {
             case facingDirection.down:
                 RaycastHit2D hitDown = Physics2D.Raycast(transform.localPosition, Vector2.down);
-                if (hitDown.collider != null)
+                if (hitDown.collider.name == "Enemy(Clone)")
                 {
-                    Debug.Log(hitDown.collider.name);
+                    //Debug.Log(hitDown.collider.name);
+                    facingDirection enemyFacingUp = (PlayerMovement.facingDirection)hitDown.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    if (enemyFacingUp == facingDirection.up)
+                    {
+                        Debug.Log(hitDown.collider.name + " contact below!");
+                        hitDown.collider.GetComponent<EnemyAI>().Petrify();
+                    }
                 }
                 break;
 
             case facingDirection.up:
                 RaycastHit2D hitUp = Physics2D.Raycast(transform.localPosition, Vector2.up);
-                if (hitUp.collider != null)
+                if (hitUp.collider.name == "Enemy(Clone)")
                 {
-                    Debug.Log(hitUp.collider.name);
+                    //Debug.Log(hitUp.collider.name);
+                    facingDirection enemyFacingDown = (PlayerMovement.facingDirection)hitUp.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    if (enemyFacingDown == facingDirection.down)
+                    {
+                        Debug.Log(hitUp.collider.name + " contact above!");
+                        hitUp.collider.GetComponent<EnemyAI>().Petrify();
+                    }
                 }
                 break;
 
             case facingDirection.left:
                 RaycastHit2D hitLeft = Physics2D.Raycast(transform.localPosition, Vector2.left);
-                if (hitLeft.collider != null)
+                if (hitLeft.collider.name == "Enemy(Clone)")
                 {
-                    Debug.Log(hitLeft.collider.name);
+                    //Debug.Log(hitLeft.collider.name);
+                    facingDirection enemyFacingRight = (PlayerMovement.facingDirection) hitLeft.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    if (enemyFacingRight == facingDirection.right)
+                    {
+                        Debug.Log(hitLeft.collider.name + " contact left!");
+                        hitLeft.collider.GetComponent<EnemyAI>().Petrify();
+                    }
                 }
                 break;
 
             case facingDirection.right:
                 RaycastHit2D hitRight = Physics2D.Raycast(transform.localPosition, Vector2.right);
-                if (hitRight.collider != null)
+                if (hitRight.collider.name == "Enemy(Clone)")
                 {
-                    Debug.Log(hitRight.collider.name);
+                    //Debug.Log(hitRight.collider.name);
+                    facingDirection enemyFacingLeft = (PlayerMovement.facingDirection) hitRight.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    if (enemyFacingLeft == facingDirection.left)
+                    {
+                        Debug.Log(hitRight.collider.name + " contact right!");
+                        hitRight.collider.GetComponent<EnemyAI>().Petrify();
+                    }
                 }
                 break;
         }
@@ -115,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
                 if (mGameMap.canPass(transform.localPosition + mMovementVector))
                 {
                     //PlayAnimation()
-                    Debug.Log(mMovementVector);
+                    //Debug.Log(mMovementVector);
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
