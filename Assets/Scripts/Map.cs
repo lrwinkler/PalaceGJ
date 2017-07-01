@@ -38,7 +38,7 @@ public class Map : MonoBehaviour {
         {
             Vector3 position = new Vector3(x, y,0);
             GameObject tile = Instantiate(mapDict[toColorString(cubeCode)], this.transform.localPosition + position, Quaternion.identity, this.transform);
-            Debug.Log("Instantialing "+ toColorString(cubeCode) + " " + x + " + " + y);
+            tile.name = string.Format("[{0}:{1}] - {2}", x, y, tile.name);
         }
         Debug.Log(canPass(x, y));
     }
