@@ -71,12 +71,14 @@ public class Map : MonoBehaviour {
     public void spawnStatue(int quality, Vector3 point)
     {
         GameObject statue = Instantiate(Resources.Load<GameObject>("Statue"), point, Quaternion.identity, this.transform);
+		mapBlueprint.SetPixel((int) point.x,(int) point.y, Color.green);
         manager.add(statue);
     }
 
     public void removeStatue(Vector3 point)
     {
-
+		mapBlueprint.SetPixel((int)point.x, (int)point.y, Color.yellow);
+		manager.Remove(point);
     } 
 
 }

@@ -8,11 +8,6 @@ public class EnemyAI : MonoBehaviour
 	public float steps = 10;
 	public float stepDuration = 0.001f;
 
-	public Sprite pEnemyUp;
-	public Sprite pEnemyDown;
-	public Sprite pEnemyRight;
-	public Sprite pEnemyLeft;
-
 	private Vector3 currentDirection;
 	private Map gameMap;
 	private float moveStep;
@@ -21,18 +16,25 @@ public class EnemyAI : MonoBehaviour
 	private facingDirection mNextFacingDirection;
 	public facingDirection pEnemyFacing;
 
-	private SpriteRenderer mSpriteRenderer;
-
 	private AudioSource myAudio;
+
+    private Animator animator;
+
+    private Transform horizontalAnimationChild;
+    private Transform upAnimationChild;
+    private Transform downAnimationChild;
 	// Use this for initialization
 	void Start () 
 	{
 		moveStep = 1 / steps;
 		gameMap = FindObjectOfType<Map>();
-		InvokeRepeating("MoveEnemy", 0, movementDelay);
-		mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        InvokeRepeating("MoveEnemy", 0, movementDelay);
 		pEnemyFacing = facingDirection.down;
 		myAudio = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        horizontalAnimationChild = transform.Find("HorizontalAnimation");
+        upAnimationChild = transform.Find("UpAnimation");
+        downAnimationChild = transform.Find("DownAnimation");
 	}
 
 	void MoveEnemy()
@@ -82,31 +84,71 @@ public class EnemyAI : MonoBehaviour
 
 	void ChangePlayerFacing()
 	{
-		if (pEnemyFacing != mNextFacingDirection)
-		{
-			switch (mNextFacingDirection)
-			{
-				case facingDirection.up:
-					mSpriteRenderer.sprite = pEnemyUp;
-					pEnemyFacing = facingDirection.up;
-					break;
+        if (horizontalAnimationChild != null && upAnimationChild != null && downAnimationChild != null)
+        {
+            if (pEnemyFacing != mNextFacingDirection)
+            {
+                switch (mNextFacingDirection)
+                {
+                    case facingDirection.up:
 
-				case facingDirection.down:
-					mSpriteRenderer.sprite = pEnemyDown;
-					pEnemyFacing = facingDirection.down;
-					break;
+                        pEnemyFacing = facingDirection.up;
 
-				case facingDirection.left:
-					mSpriteRenderer.sprite = pEnemyLeft;
-					pEnemyFacing = facingDirection.left;
-					break;
+                        horizontalAnimationChild.gameObject.SetActive(false);
+                        downAnimationChild.gameObject.SetActive(false);
+                        upAnimationChild.gameObject.SetActive(true);
 
-				case facingDirection.right:
-					mSpriteRenderer.sprite = pEnemyRight;
-					pEnemyFacing = facingDirection.right;
-					break;
-			}
-		}
+                        animator.SetBool("facingRight", false);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingUp", true);
+                        animator.SetBool("facingDown", false);
+                        break;
+
+                    case facingDirection.down:
+
+                        pEnemyFacing = facingDirection.down;
+                        horizontalAnimationChild.gameObject.SetActive(false);
+                        downAnimationChild.gameObject.SetActive(true);
+                        upAnimationChild.gameObject.SetActive(false);
+
+                        animator.SetBool("facingRight", false);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", true);
+                        break;
+
+                    case facingDirection.left:
+
+                        pEnemyFacing = facingDirection.left;
+                        horizontalAnimationChild.gameObject.SetActive(true);
+                        downAnimationChild.gameObject.SetActive(false);
+                        upAnimationChild.gameObject.SetActive(false);
+
+                        animator.SetBool("facingRight", false);
+                        animator.SetBool("facingLeft", true);
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", false);
+                        break;
+
+                    case facingDirection.right:
+
+                        pEnemyFacing = facingDirection.right;
+                        horizontalAnimationChild.gameObject.SetActive(true);
+                        downAnimationChild.gameObject.SetActive(false);
+                        upAnimationChild.gameObject.SetActive(false);
+
+                        animator.SetBool("facingRight", true);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", false);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("It done fucked up!");
+        }
 	}
 
     public facingDirection GetFacingDirection()
@@ -123,4 +165,13 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject, myAudio.clip.length);
         //display statue
     }
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			other.GetComponent<PlayerWinLoose>().Die();
+		}
+
+	}
 }
