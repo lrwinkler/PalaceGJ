@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c5a91abb285c14449b775de77420ff4b
+timeCreated: 1498900799
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Zeus
+  fontNames:
+  - Zeus
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
