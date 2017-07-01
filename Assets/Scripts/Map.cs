@@ -49,7 +49,6 @@ public class Map : MonoBehaviour {
         return color.r.ToString("F") + color.g.ToString("F") + color.b.ToString("F");
     }
 
-
     public bool canPass(Vector3 point)
     {
         if (mapBounds.Contains(point))
@@ -66,5 +65,15 @@ public class Map : MonoBehaviour {
         Debug.Log(string.Format("there is nothing to see anymore [{0}:{1}]", (int)point.x, (int)point.y));
         return false;
     }
+
+    public void spawnStatue(int quality, Vector3 point)
+    {
+
+    }
+
+    public void removeStatue(Vector3 point)
+    {
+
+    } 
 
 }

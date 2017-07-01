@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
 
 	void MoveEnemy()
 	{
-		currentDirection = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
+		currentDirection = new Vector3(Random.Range(0, 3), Random.Range(0, 3), 0);
 		//No movement in both axis at once!!
 		if (currentDirection.x != 0 && currentDirection.y != 0)
 		{
@@ -26,9 +26,9 @@ public class EnemyAI : MonoBehaviour
 		//Move if it's free tile.
 		if (gameMap != null)
 		{
-			if (gameMap.canPass((int)currentDirection.x, (int)currentDirection.y))
+			if (gameMap.canPass(currentDirection))
 			{
-				transform.position += currentDirection;
+				transform.position = currentDirection;
 			}
 			else
 			{
