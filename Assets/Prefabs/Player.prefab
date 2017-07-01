@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1099356192756804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 8, y: 5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &114862832726187052
 MonoBehaviour:
@@ -79,6 +79,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pMovementDuration: 0.1
+  pPlayerUp: {fileID: 21300000, guid: 13d305b89c5bb2f4d8866682b86bbf1f, type: 3}
+  pPlayerDown: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3, type: 3}
+  pPlayerRight: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020, type: 3}
+  pPlayerLeft: {fileID: 21300000, guid: 7cbbd227265fa08488c7d653636537c6, type: 3}
 --- !u!212 &212756327211228152
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -111,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
