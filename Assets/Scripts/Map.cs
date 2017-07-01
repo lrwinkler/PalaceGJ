@@ -10,12 +10,14 @@ public class Map : MonoBehaviour {
 
     private Dictionary<string, GameObject> mapDict;
     private Rect mapBounds;
+    private StatueManager manager;
 
     void Start()
     {
         GenerateDict();
         GenerateMap();
         mapBounds = new Rect(0, 0, mapBlueprint.width, mapBlueprint.height);
+        manager = new StatueManager();
     }
 
     private void GenerateDict()
@@ -38,7 +40,7 @@ public class Map : MonoBehaviour {
         
         if (mapDict.ContainsKey(toColorString(cubeCode)))
         {
-            Vector3 position = new Vector3(x, y,0);
+            Vector3 position = new Vector3(x, y, 0);
             GameObject tile = Instantiate(mapDict[toColorString(cubeCode)], this.transform.localPosition + position, Quaternion.identity, this.transform);
             tile.name = string.Format("[{0}:{1}] - {2}", x, y, tile.name);
         }
@@ -68,7 +70,8 @@ public class Map : MonoBehaviour {
 
     public void spawnStatue(int quality, Vector3 point)
     {
-
+        GameObject statue = Instantiate(Resources.Load<GameObject>("Statue"), point, Quaternion.identity, this.transform);
+        manager.add(statue);
     }
 
     public void removeStatue(Vector3 point)

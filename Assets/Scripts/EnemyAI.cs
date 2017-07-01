@@ -117,8 +117,8 @@ public class EnemyAI : MonoBehaviour
     public void Petrify()
     {
         //get coordinates
-        //create new statue object
-		myAudio.Play();
+        gameMap.spawnStatue(1, transform.position);
+        myAudio.Play();
 		transform.localScale = Vector3.zero;
         Destroy(gameObject, myAudio.clip.length);
         //display statue
