@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite pPlayerDown;
     public Sprite pPlayerRight;
     public Sprite pPlayerLeft;
+	public float audioPitchRange = 0.5f;
 
     private Vector3 mMovementVector;
     private bool mIsMoving;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer mSpriteRenderer;
 
+	private AudioSource myAudio;
+
     // Use this for initialization
     void Start()
     {
@@ -30,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         mPlayerFacing = facingDirection.down;
 
         mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+		myAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -133,7 +138,8 @@ public class PlayerMovement : MonoBehaviour
         float stepDuration = moveDuration / steps;
 
         float stepSize = 1.0f / steps;
-
+		myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
+		myAudio.Play();
         for (int i = 0; i <= steps; i++)
         {
             float lerpValue = i * stepSize;
