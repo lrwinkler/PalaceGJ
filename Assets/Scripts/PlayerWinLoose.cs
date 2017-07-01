@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerWinLoose : MonoBehaviour 
 {
-
+	public int enemiesPetrified = 0;
+	public Text textCounter;
 
 
 	// Use this for initialization
@@ -23,5 +25,11 @@ public class PlayerWinLoose : MonoBehaviour
 	{
 		//Show Death UI and wait for a moment
 		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Petrified()
+	{
+		enemiesPetrified++;
+		textCounter.text = "ENEMIES PETRIFIED: " + enemiesPetrified;
 	}
 }
