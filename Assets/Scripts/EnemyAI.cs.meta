@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: e1ba068f6ad2c6848baccfe00c42a67b
-timeCreated: 1498855428
+timeCreated: 1498923871
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pEnemyUp: {fileID: 21300000, guid: 13d305b89c5bb2f4d8866682b86bbf1f, type: 3}
+  - pEnemyDown: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3, type: 3}
+  - pEnemyRight: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020, type: 3}
+  - pEnemyLeft: {fileID: 21300000, guid: 7cbbd227265fa08488c7d653636537c6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
