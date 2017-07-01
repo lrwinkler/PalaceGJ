@@ -9,7 +9,7 @@ public class EnemyGenerator : MonoBehaviour {
 
 	private Map gameMap;
 	private Transform playerTransform;
-	private int numOfEnemiesToSpawn;
+	public int numOfEnemiesToSpawn;
 	private int maxMapWidth;
 	private int maxMapHeight;
 	// Use this for initialization
