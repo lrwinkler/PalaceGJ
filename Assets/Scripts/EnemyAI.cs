@@ -123,4 +123,13 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject, myAudio.clip.length);
         //display statue
     }
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			other.GetComponent<PlayerWinLoose>().Die();
+		}
+
+	}
 }
