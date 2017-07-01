@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour
 	public facingDirection pEnemyFacing;
 
 	private SpriteRenderer mSpriteRenderer;
+
+	private AudioSource myAudio;
 	// Use this for initialization
 	void Start () 
 	{
@@ -30,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 		InvokeRepeating("MoveEnemy", 0, movementDelay);
 		mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		pEnemyFacing = facingDirection.down;
+		myAudio = GetComponent<AudioSource>();
 	}
 
 	void MoveEnemy()
@@ -115,7 +118,9 @@ public class EnemyAI : MonoBehaviour
     {
         //get coordinates
         //create new statue object
-        Destroy(gameObject);
+		myAudio.Play();
+		transform.localScale = Vector3.zero;
+        Destroy(gameObject, myAudio.clip.length);
         //display statue
     }
 }
