@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatueManager {
-    List<Statue> statues;
-
-	// Use this for initialization
-	void Start () {
-        statues = new List<Statue>();
-    }
+    List<GameObject> statues = new List<GameObject>();
 	
-	public void add(Statue statue)
+	public void add(GameObject statue)
     {
         statues.Add(statue);
     }
