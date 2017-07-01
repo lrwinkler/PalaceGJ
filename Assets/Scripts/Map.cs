@@ -8,12 +8,10 @@ public class Map : MonoBehaviour {
     public bool spawnInLocalCoordinates;
     public MapEntry[] mapInput;
 
-    private static Map instance;
     private Dictionary<string, GameObject> mapDict;
 
     void Start()
     {
-        instance = this;
         GenerateDict();
         GenerateMap();
     }
@@ -51,14 +49,15 @@ public class Map : MonoBehaviour {
     }
 
 
-    public static bool canPass(int x, int y)
+    public bool canPass(int x, int y)
     {
-        return instance.mapBlueprint.GetPixel(x, y).r == 1f;
+        return mapBlueprint.GetPixel(x, y).r == 1f;
     }
 
-    public static bool canSee(int x, int y)
+
+	public bool canSee(int x, int y)
     {
-        return instance.mapBlueprint.GetPixel(x, y).g == 1f;
+        return mapBlueprint.GetPixel(x, y).g == 1f;
     }
 
 }
