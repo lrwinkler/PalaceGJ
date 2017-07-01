@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
         mPlayerFacing = facingDirection.down;
 
-        mSpriteRenderer = GetComponent<SpriteRenderer>();
+        mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
