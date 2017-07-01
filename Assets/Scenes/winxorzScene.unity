@@ -121,7 +121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4340770148950522, guid: d5480f54f07ee6d4394691f62fa61253, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 4.07
       objectReference: {fileID: 0}
     - target: {fileID: 4340770148950522, guid: d5480f54f07ee6d4394691f62fa61253, type: 2}
       propertyPath: m_LocalPosition.z
@@ -147,36 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 212756327211228152, guid: d5480f54f07ee6d4394691f62fa61253,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3,
-        type: 3}
-    - target: {fileID: 114862832726187052, guid: d5480f54f07ee6d4394691f62fa61253,
-        type: 2}
-      propertyPath: pPlayerUp
-      value: 
-      objectReference: {fileID: 21300000, guid: 13d305b89c5bb2f4d8866682b86bbf1f,
-        type: 3}
-    - target: {fileID: 114862832726187052, guid: d5480f54f07ee6d4394691f62fa61253,
-        type: 2}
-      propertyPath: pPlayerDown
-      value: 
-      objectReference: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3,
-        type: 3}
-    - target: {fileID: 114862832726187052, guid: d5480f54f07ee6d4394691f62fa61253,
-        type: 2}
-      propertyPath: pPlayerRight
-      value: 
-      objectReference: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020,
-        type: 3}
-    - target: {fileID: 114862832726187052, guid: d5480f54f07ee6d4394691f62fa61253,
-        type: 2}
-      propertyPath: pPlayerLeft
-      value: 
-      objectReference: {fileID: 21300000, guid: 7cbbd227265fa08488c7d653636537c6,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d5480f54f07ee6d4394691f62fa61253, type: 2}
   m_IsPrefabParent: 0
