@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatueManager {
+public class StatueManager : MonoBehaviour
+{
     List<GameObject> statues = new List<GameObject>();
+
+    private Camera mainCamera;
+    private Transform cameraTransform;
 	
 	public void add(GameObject statue)
     {
@@ -21,4 +25,10 @@ public class StatueManager {
 			}
 		}
 	}
+
+    public void startDeletingSequence()
+    {
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cameraTransform = mainCamera.transform;
+    }
 }
