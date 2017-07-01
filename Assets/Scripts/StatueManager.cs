@@ -9,4 +9,16 @@ public class StatueManager {
     {
         statues.Add(statue);
     }
+
+	public void Remove(Vector3 point)
+	{
+		foreach(GameObject statue in statues)
+		{
+			if(statue.transform.position.Equals(point))
+			{
+				statues.Remove(statue);
+				return;
+			}
+		}
+	}
 }

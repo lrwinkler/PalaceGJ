@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer mSpriteRenderer;
 
 	private AudioSource myAudio;
-
+	private PlayerWinLoose myWinLoose;
     // Use this for initialization
     void Start()
     {
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 		myAudio = GetComponent<AudioSource>();
+		myWinLoose = GetComponent<PlayerWinLoose>();
     }
 
     // Update is called once per frame
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingUp == facingDirection.up)
                     {
                         Debug.Log(hitDown.collider.name + " contact below!");
+						myWinLoose.Petrified();
                         hitDown.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -70,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingDown == facingDirection.down)
                     {
                         Debug.Log(hitUp.collider.name + " contact above!");
+						myWinLoose.Petrified();
                         hitUp.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -84,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingRight == facingDirection.right)
                     {
                         Debug.Log(hitLeft.collider.name + " contact left!");
+						myWinLoose.Petrified();
                         hitLeft.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -98,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingLeft == facingDirection.left)
                     {
                         Debug.Log(hitRight.collider.name + " contact right!");
+						myWinLoose.Petrified();
                         hitRight.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }

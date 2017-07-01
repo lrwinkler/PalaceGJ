@@ -77,7 +77,8 @@ public class Map : MonoBehaviour {
 
     public void removeStatue(Vector3 point)
     {
-
+		mapBlueprint.SetPixel((int)point.x, (int)point.y, Color.yellow);
+		manager.Remove(point);
     } 
 
 }
