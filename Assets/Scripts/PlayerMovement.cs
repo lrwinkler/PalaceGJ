@@ -5,50 +5,71 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public Vector2 pCoordinates;
-    public float mAllowedMovementFrequency;
+    public float pMovementDuration;
 
-    private Vector2 mMovementVector;
+    private Vector3 mMovementVector;
     private float mTimeCounter;
-    private float mAnimationTime;
+
 
     // Use this for initialization
     void Start()
     {
-        pCoordinates.Set(0, 0);
-        mTimeCounter = 0.0f;
+        mTimeCounter = 1.0f;
+        pMovementDuration = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
         mTimeCounter += Time.deltaTime;
-        MovementInput();
+
+        if (mTimeCounter >= pMovementDuration*3)
+        {
+            MovementInput();
+        }
     }
 
     private void MovementInput()
     {
+        mTimeCounter = 0.0f;
 
-        mMovementVector.Set((Input.GetAxisRaw("Horizontal")), Input.GetAxisRaw("Vertical"));
+        mMovementVector.Set((Input.GetAxisRaw("Horizontal")), Input.GetAxisRaw("Vertical"), 0);
 
-        if (mTimeCounter >= mAllowedMovementFrequency)
+        // Checks if mMovementVector doesn't imply diagonal movement, checks if tile moved to is passable terrain, then starts moving the player.
+        if ((mMovementVector.x == 0 && mMovementVector.y != 0)
+            || (mMovementVector.x != 0 && mMovementVector.y == 0))
         {
-
-            mTimeCounter = 0.0f;
-
-            // Checks if mMovementVector doesn't imply diagonal movement, checks if tile moved to is passable terrain, then moves player object by the vector value.
-            if ((mMovementVector.x == 0 && mMovementVector.y != 0)
-                || (mMovementVector.x != 0 && mMovementVector.y == 0))
-            {
-                //if(checkIfPassable())
-                //{
-                //PlayAnimation()
-                transform.Translate(mMovementVector.x, mMovementVector.y, 0);
-                pCoordinates.x += mMovementVector.x;
-                pCoordinates.y += mMovementVector.y;
-                //}
-            }
+            //if(checkIfPassable())
+            //{
+            //PlayAnimation()
+            Debug.Log(mMovementVector);
+            StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
+            //}
+            //else
+            //{
+            //
         }
+
+    }
+
+    //Interpolates the move and ensures smooth transition between coordinates
+    IEnumerator MovePlayer(Vector3 startingPosition, Vector3 endingPosition, float moveDuration)
+    {
+        int steps = (int) Mathf.Ceil(moveDuration * 60);
+
+        float stepDuration = moveDuration / steps;
+
+        float stepSize = 1.0f / steps;
+
+        for (int i = 0; i <= steps; i++)
+        {
+            float lerpValue = i * stepSize;
+            transform.localPosition = Vector3.Lerp(startingPosition, endingPosition, lerpValue);
+
+            yield return new WaitForSeconds(stepDuration);
+        }
+
+        transform.localPosition = endingPosition;
     }
 
     /* TODO: Implement a check whether the tile to be moved to is passable terrain or not.
