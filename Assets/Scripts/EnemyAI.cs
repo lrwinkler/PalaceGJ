@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
 
 	public enum facingDirection { up, down, left, right };
 	private facingDirection mNextFacingDirection;
-	public facingDirection mEnemyFacing;
+	public facingDirection pEnemyFacing;
 
 	private SpriteRenderer mSpriteRenderer;
 	// Use this for initialization
@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
 		gameMap = FindObjectOfType<Map>();
 		InvokeRepeating("MoveEnemy", 0, movementDelay);
 		mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		mEnemyFacing = facingDirection.down;
+		pEnemyFacing = facingDirection.down;
 	}
 
 	void MoveEnemy()
@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
 				Vector3 oldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 				for (int i = 0; i <= steps; i++)
 				{
-					Debug.Log(oldPosition);
+					//Debug.Log(oldPosition);
 					transform.position = Vector3.Lerp(oldPosition, newDirection, moveStep*i);
 					yield return new WaitForSeconds(stepDuration);
 				}
@@ -79,30 +79,43 @@ public class EnemyAI : MonoBehaviour
 
 	void ChangePlayerFacing()
 	{
-		if (mEnemyFacing != mNextFacingDirection)
+		if (pEnemyFacing != mNextFacingDirection)
 		{
 			switch (mNextFacingDirection)
 			{
 				case facingDirection.up:
 					mSpriteRenderer.sprite = pEnemyUp;
-					mEnemyFacing = facingDirection.up;
+					pEnemyFacing = facingDirection.up;
 					break;
 
 				case facingDirection.down:
 					mSpriteRenderer.sprite = pEnemyDown;
-					mEnemyFacing = facingDirection.down;
+					pEnemyFacing = facingDirection.down;
 					break;
 
 				case facingDirection.left:
 					mSpriteRenderer.sprite = pEnemyLeft;
-					mEnemyFacing = facingDirection.left;
+					pEnemyFacing = facingDirection.left;
 					break;
 
 				case facingDirection.right:
 					mSpriteRenderer.sprite = pEnemyRight;
-					mEnemyFacing = facingDirection.right;
+					pEnemyFacing = facingDirection.right;
 					break;
 			}
 		}
 	}
+
+    public facingDirection GetFacingDirection()
+    {
+        return pEnemyFacing;
+    }
+
+    public void Petrify()
+    {
+        //get coordinates
+        //create new statue object
+        Destroy(gameObject);
+        //display statue
+    }
 }
