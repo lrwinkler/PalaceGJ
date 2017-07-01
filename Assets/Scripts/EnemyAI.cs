@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
 		//Move if it's free tile.
 		if (gameMap != null)
 		{
-			if (gameMap.canPass((int)currentDirection.x, (int)currentDirection.y))
+			if (gameMap.canPass(new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z)))
 			{
 				transform.position += currentDirection;
 			}

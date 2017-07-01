@@ -727,8 +727,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Created by: \u0141ukasz Winkler \"Winxorz\", Helena Kot \"Kit\", Jacek
-    Kozieja \"Asterix\""
+  m_Text: "Created by: \u0141ukasz Winkler \"Winxorz\", Helena Kot \"Kit\", Karolina
+    G\xF3rska \"Chomik\", Jacek Kozieja \"Asterix\""
 --- !u!222 &1757628120
 CanvasRenderer:
   m_ObjectHideFlags: 0
