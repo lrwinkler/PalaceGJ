@@ -6,16 +6,30 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float pMovementDuration;
+    public Sprite pPlayerUp;
+    public Sprite pPlayerDown;
+    public Sprite pPlayerRight;
+    public Sprite pPlayerLeft;
 
     private Vector3 mMovementVector;
     private bool mIsMoving;
+    private Map mGameMap;
 
+    private enum facingDirection { up, down, left, right };
+    private facingDirection mNextFacingDirection;
+    private facingDirection mPlayerFacing;
+
+    private SpriteRenderer mSpriteRenderer;
 
     // Use this for initialization
     void Start()
     {
+        mGameMap = FindObjectOfType<Map>();
         pMovementDuration = 0.1f;
         mIsMoving = false;
+        mPlayerFacing = facingDirection.down;
+
+        mSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,37 +47,40 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey("left"))
             {
                 mMovementVector = (Vector3.left);
+                mNextFacingDirection = facingDirection.left;
             }
             if (Input.GetKey("right"))
             {
                 mMovementVector = (Vector3.right);
+                mNextFacingDirection = facingDirection.right;
             }
             if (Input.GetKey("up"))
             {
                 mMovementVector = (Vector3.up);
+                mNextFacingDirection = facingDirection.up;
             }
             if (Input.GetKey("down"))
             {
                 mMovementVector = (Vector3.down);
+                mNextFacingDirection = facingDirection.down;
             }
 
             // Checks if mMovementVector doesn't imply diagonal movement, checks if tile moved to is passable terrain, then starts moving the player.
             if ((mMovementVector.x == 0 && mMovementVector.y != 0)
                 || (mMovementVector.x != 0 && mMovementVector.y == 0))
             {
-                //if(checkIfPassable())
-                //{
-                //PlayAnimation()
-                Debug.Log(mMovementVector);
-                mIsMoving = true;
-                StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
-                //ChangePlayerFacing();
-                //}
-                //else
-                //{
-                //ChangePlayerFacing();
-                //}
-                //mTimeCounter = 0.0f;
+                if (mGameMap.canPass(transform.localPosition + mMovementVector))
+                {
+                    //PlayAnimation()
+                    Debug.Log(mMovementVector);
+                    mIsMoving = true;
+                    StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
+                    ChangePlayerFacing();
+                }
+                else
+                {
+                    ChangePlayerFacing();
+                }
             }
 
             mMovementVector.Set(0, 0, 0);
@@ -91,10 +108,32 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
     }
 
-    /* TODO: Implement a check whether the tile to be moved to is passable terrain or not.
-    private bool checkIfPassable()
+    void ChangePlayerFacing()
     {
+        if (mPlayerFacing != mNextFacingDirection)
+        {
+            switch (mNextFacingDirection)
+            {
+                case facingDirection.up:
+                    mSpriteRenderer.sprite = pPlayerUp;
+                    mPlayerFacing = facingDirection.up;
+                    break;
 
+                case facingDirection.down:
+                    mSpriteRenderer.sprite = pPlayerDown;
+                    mPlayerFacing = facingDirection.down;
+                    break;
+
+                case facingDirection.left:
+                    mSpriteRenderer.sprite = pPlayerLeft;
+                    mPlayerFacing = facingDirection.left;
+                    break;
+
+                case facingDirection.right:
+                    mSpriteRenderer.sprite = pPlayerRight;
+                    mPlayerFacing = facingDirection.right;
+                    break;
+            }
+        }
     }
-    */
 }
