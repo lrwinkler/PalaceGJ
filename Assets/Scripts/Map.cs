@@ -9,11 +9,13 @@ public class Map : MonoBehaviour {
     public MapEntry[] mapInput;
 
     private Dictionary<string, GameObject> mapDict;
+    private Rect mapBounds;
 
     void Start()
     {
         GenerateDict();
         GenerateMap();
+        mapBounds = new Rect(0, 0, mapBlueprint.width, mapBlueprint.height);
     }
 
     private void GenerateDict()
@@ -40,7 +42,6 @@ public class Map : MonoBehaviour {
             GameObject tile = Instantiate(mapDict[toColorString(cubeCode)], this.transform.localPosition + position, Quaternion.identity, this.transform);
             tile.name = string.Format("[{0}:{1}] - {2}", x, y, tile.name);
         }
-        Debug.Log(canPass(x, y));
     }
 
     private string toColorString(Color color)
@@ -49,15 +50,21 @@ public class Map : MonoBehaviour {
     }
 
 
-    public bool canPass(int x, int y)
+    public bool canPass(Vector3 point)
     {
-        return mapBlueprint.GetPixel(x, y).r == 1f;
+        if (mapBounds.Contains(point))
+            return mapBlueprint.GetPixel((int)point.x, (int)point.y).r >= 0.5;
+        Debug.Log(string.Format("there is nowhere to go anymore [{0}:{1}]", (int)point.x, (int)point.y));
+        return false;
     }
 
 
-	public bool canSee(int x, int y)
+	public bool canSee(Vector3 point)
     {
-        return mapBlueprint.GetPixel(x, y).g == 1f;
+        if (mapBounds.Contains(point))
+            return mapBlueprint.GetPixel((int)point.x, (int)point.y).g.Equals(1f);
+        Debug.Log(string.Format("there is nothing to see anymore [{0}:{1}]", (int)point.x, (int)point.y));
+        return false;
     }
 
 }
