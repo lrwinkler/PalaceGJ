@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case facingDirection.down:
                 RaycastHit2D hitDown = Physics2D.Raycast(transform.localPosition, Vector2.down);
-                if (hitDown.collider.name == "Enemy(Clone)")
+                if (hitDown.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitDown.collider.name);
                     facingDirection enemyFacingUp = (PlayerMovement.facingDirection)hitDown.collider.GetComponent<EnemyAI>().GetFacingDirection();
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.up:
                 RaycastHit2D hitUp = Physics2D.Raycast(transform.localPosition, Vector2.up);
-                if (hitUp.collider.name == "Enemy(Clone)")
+                if (hitUp.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitUp.collider.name);
                     facingDirection enemyFacingDown = (PlayerMovement.facingDirection)hitUp.collider.GetComponent<EnemyAI>().GetFacingDirection();
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.left:
                 RaycastHit2D hitLeft = Physics2D.Raycast(transform.localPosition, Vector2.left);
-                if (hitLeft.collider.name == "Enemy(Clone)")
+                if (hitLeft.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitLeft.collider.name);
                     facingDirection enemyFacingRight = (PlayerMovement.facingDirection) hitLeft.collider.GetComponent<EnemyAI>().GetFacingDirection();
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.right:
                 RaycastHit2D hitRight = Physics2D.Raycast(transform.localPosition, Vector2.right);
-                if (hitRight.collider.name == "Enemy(Clone)")
+                if (hitRight.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitRight.collider.name);
                     facingDirection enemyFacingLeft = (PlayerMovement.facingDirection) hitRight.collider.GetComponent<EnemyAI>().GetFacingDirection();
