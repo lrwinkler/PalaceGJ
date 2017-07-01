@@ -29,13 +29,51 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
         mPlayerFacing = facingDirection.down;
 
-        mSpriteRenderer = GetComponent<SpriteRenderer>();
+        mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         MovementInput();
+    }
+
+    private void FixedUpdate()
+    {
+        switch (mPlayerFacing)
+        {
+            case facingDirection.down:
+                RaycastHit2D hitDown = Physics2D.Raycast(transform.localPosition, Vector2.down);
+                if (hitDown.collider != null)
+                {
+                    Debug.Log(hitDown.collider.name);
+                }
+                break;
+
+            case facingDirection.up:
+                RaycastHit2D hitUp = Physics2D.Raycast(transform.localPosition, Vector2.up);
+                if (hitUp.collider != null)
+                {
+                    Debug.Log(hitUp.collider.name);
+                }
+                break;
+
+            case facingDirection.left:
+                RaycastHit2D hitLeft = Physics2D.Raycast(transform.localPosition, Vector2.left);
+                if (hitLeft.collider != null)
+                {
+                    Debug.Log(hitLeft.collider.name);
+                }
+                break;
+
+            case facingDirection.right:
+                RaycastHit2D hitRight = Physics2D.Raycast(transform.localPosition, Vector2.right);
+                if (hitRight.collider != null)
+                {
+                    Debug.Log(hitRight.collider.name);
+                }
+                break;
+        }
     }
 
     private void MovementInput()
@@ -108,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
     }
 
+    //Rotates player character by changing the used sprite.
     void ChangePlayerFacing()
     {
         if (mPlayerFacing != mNextFacingDirection)

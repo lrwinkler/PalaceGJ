@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: b0aad402959f77b4593e1de40a38b401
-timeCreated: 1498853039
+timeCreated: 1498923841
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pPlayerUp: {instanceID: 0}
+  - pPlayerDown: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3, type: 3}
+  - pPlayerRight: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020, type: 3}
+  - pPlayerLeft: {fileID: 21300000, guid: 7cbbd227265fa08488c7d653636537c6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
