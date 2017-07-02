@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case facingDirection.down:
                 RaycastHit2D hitDown = Physics2D.Raycast(transform.localPosition, Vector2.down);
+                //Debug.Log(hitDown.collider.name);
                 if (hitDown.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitDown.collider.name);
@@ -72,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.up:
                 RaycastHit2D hitUp = Physics2D.Raycast(transform.localPosition, Vector2.up);
+                //Debug.Log(hitUp.collider.name);
                 if (hitUp.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitUp.collider.name);
@@ -87,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.left:
                 RaycastHit2D hitLeft = Physics2D.Raycast(transform.localPosition, Vector2.left);
+                //Debug.Log(hitLeft.collider.name);
                 if (hitLeft.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitLeft.collider.name);
@@ -102,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
             case facingDirection.right:
                 RaycastHit2D hitRight = Physics2D.Raycast(transform.localPosition, Vector2.right);
+                //Debug.Log(hitRight.collider.name);
                 if (hitRight.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitRight.collider.name);
@@ -151,7 +155,6 @@ public class PlayerMovement : MonoBehaviour
                 if (mGameMap.canPass(transform.localPosition + mMovementVector))
                 {
 
-                    //Debug.Log(mMovementVector);
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
@@ -188,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
     }
 
-    //Rotates player character by changing the used sprite.
+    //Rotates player character by changing the used animation.
     void ChangePlayerFacing()
     {
         if (mPlayerFacing != mNextFacingDirection)
