@@ -152,6 +152,11 @@ Prefab:
       propertyPath: textCounter
       value: 
       objectReference: {fileID: 2098583281}
+    - target: {fileID: 114834315354010726, guid: 3861e756aebb0434d8bd9442355db4a3,
+        type: 2}
+      propertyPath: textWin
+      value: 
+      objectReference: {fileID: 1086105524}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3861e756aebb0434d8bd9442355db4a3, type: 2}
   m_IsPrefabParent: 0
