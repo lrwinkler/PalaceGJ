@@ -12,6 +12,7 @@ public class PlayerWinLoose : MonoBehaviour
     public Text textPoints;
 
     public int defaultPoint = 100;
+    public int proximityBonus = 50;
     private int currentScore = 0;
 
 	private EnemyGenerator enemyGen;
@@ -40,22 +41,21 @@ public class PlayerWinLoose : MonoBehaviour
         newWave();
     }
 
-    public void Petrified()
+    public void Petrified(float distance)
 	{
 		enemiesPetrified++;
-        updateScore();
+        updateScore(distance);
+        Debug.Log(distance);
 		if(enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
 		{
             //Initiate scoring screen
             StartCoroutine(win());
         }
-       
-
     }
 
-    void updateScore()
+    void updateScore(float distance)
     {
-        currentScore += defaultPoint;
+        currentScore += defaultPoint + Mathf.Max(0, (proximityBonus * (int)(5 - distance)));
         textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn - enemiesPetrified);
         textPoints.text = "POINTS: " + currentScore;
     }

@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingUp == facingDirection.up)
                     {
                         Debug.Log(hitDown.collider.name + " contact below!");
-                        myWinLoose.Petrified();
+                        myWinLoose.Petrified(hitDown.distance);
                         hitDown.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingDown == facingDirection.down)
                     {
                         Debug.Log(hitUp.collider.name + " contact above!");
-                        myWinLoose.Petrified();
+                        myWinLoose.Petrified(hitUp.distance);
                         hitUp.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingRight == facingDirection.right)
                     {
                         Debug.Log(hitLeft.collider.name + " contact left!");
-                        myWinLoose.Petrified();
+                        myWinLoose.Petrified(hitLeft.distance);
                         hitLeft.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingLeft == facingDirection.left)
                     {
                         Debug.Log(hitRight.collider.name + " contact right!");
-                        myWinLoose.Petrified();
+                        myWinLoose.Petrified(hitRight.distance);
                         hitRight.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
