@@ -11,6 +11,7 @@ public class Map : MonoBehaviour {
     private Dictionary<string, GameObject> mapDict;
     private Rect mapBounds;
     private StatueManager manager;
+    Color aSpecialKindOfYellow;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class Map : MonoBehaviour {
         mapDict = new Dictionary<string, GameObject>();
         foreach (MapEntry entry in mapInput)
             mapDict.Add(toColorString(entry.color), entry.prefab);
+        aSpecialKindOfYellow = mapInput[0].color;
     }
 
     private void GenerateMap()
@@ -37,6 +39,11 @@ public class Map : MonoBehaviour {
     private void spawnCube(int x, int y)
     {
         Color cubeCode = mapBlueprint.GetPixel(x, y);
+        if (cubeCode.Equals(Color.green)) {
+            mapBlueprint.SetPixel(x, y, aSpecialKindOfYellow);
+            cubeCode = aSpecialKindOfYellow;
+            Debug.Log("ale chuj");
+        }
         
         if (mapDict.ContainsKey(toColorString(cubeCode)))
         {
