@@ -16,7 +16,6 @@ public class PlayerWinLoose : MonoBehaviour
 	void Start () 
 	{
 		enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();
-        StartCoroutine(win());
     }
 
 	void Update()
@@ -44,12 +43,15 @@ public class PlayerWinLoose : MonoBehaviour
 		if(enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
 		{
             //Initiate scoring screen
-            statueManager.startDeletingSequence();
+            StartCoroutine(win());
         }
 	}
 
     public void newWave()
     {
-        enemyGen.SpawnEnemies(enemiesPetrified + enemyGen.howManyToAdd);
+        enemyGen.numOfEnemiesToSpawn += enemyGen.howManyToAdd;
+        enemyGen.SpawnEnemies(enemyGen.numOfEnemiesToSpawn);
+        textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn);
+        enemiesPetrified = 0;
     }
 }
