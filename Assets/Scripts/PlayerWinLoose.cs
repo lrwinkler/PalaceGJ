@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerWinLoose : MonoBehaviour 
 {
-	public int enemiesPetrified = 0;
+	int enemiesPetrified = 0;
 	public Text textCounter;
 	public Text textWin;
-	public CanvasGroup textDie;
+    public Text textPoints;
+
+    public int defaultPoint = 100;
+    private int currentScore = 0;
 
 	private EnemyGenerator enemyGen;
     private StatueManager statueManager;
@@ -25,13 +28,7 @@ public class PlayerWinLoose : MonoBehaviour
 
     public void Die()
 	{
-		StartCoroutine(DoAndDie());
-	}
-
-	IEnumerator DoAndDie()
-	{
-		textDie.alpha = 1;
-		yield return new WaitForSeconds(2);
+		//Show Death UI and wait for a moment
 		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
 
@@ -46,13 +43,22 @@ public class PlayerWinLoose : MonoBehaviour
     public void Petrified()
 	{
 		enemiesPetrified++;
-		textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn - enemiesPetrified);
+        updateScore();
 		if(enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
 		{
             //Initiate scoring screen
             StartCoroutine(win());
         }
-	}
+       
+
+    }
+
+    void updateScore()
+    {
+        currentScore += defaultPoint;
+        textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn - enemiesPetrified);
+        textPoints.text = "POINTS: " + currentScore;
+    }
 
     public void newWave()
     {
