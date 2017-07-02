@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4120251483322386}
   - component: {fileID: 61651143733021258}
+  - component: {fileID: 114918267325821174}
   m_Layer: 0
   m_Name: Column
   m_TagString: Untagged
@@ -50,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056235548023526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.824743, y: -0.40049553, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4772948321466086}
@@ -95,6 +96,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114918267325821174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056235548023526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa86d9187c39f846b883bd9a31d7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 0e7fe136611d9ba43ae7c1ce3d42508b, type: 3}
+  - {fileID: 21300000, guid: a87fae0dbb948d345b4f1d1e09ca8e2d, type: 3}
+  - {fileID: 21300000, guid: ab7d726817f612141bf494adb8e239f8, type: 3}
+  - {fileID: 21300000, guid: 498275f59d81da1429db6ee07153b628, type: 3}
+  - {fileID: 21300000, guid: 4b1b6bc769c765145ae9cdb071d06094, type: 3}
 --- !u!212 &212437466665864518
 SpriteRenderer:
   m_ObjectHideFlags: 1

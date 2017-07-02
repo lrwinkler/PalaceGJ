@@ -35,6 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4943304136015188}
+  - component: {fileID: 114412260253871546}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -62,13 +63,30 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1342044782799392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -15.9965105, y: -0.90724146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4224030741538252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114412260253871546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342044782799392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa86d9187c39f846b883bd9a31d7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 418e768fbc170904d8e1e22fab0fd03c, type: 3}
+  - {fileID: 21300000, guid: 39b35e0cc54baae40ba39f78d3d34c4f, type: 3}
+  - {fileID: 21300000, guid: 4bc67982012440c4abe1416e7001f697, type: 3}
+  - {fileID: 21300000, guid: eee891329cd584646b02dec54530f725, type: 3}
+  - {fileID: 21300000, guid: 2a2b42442d1e20b4aac90fa951e08202, type: 3}
 --- !u!212 &212886287028139450
 SpriteRenderer:
   m_ObjectHideFlags: 1
