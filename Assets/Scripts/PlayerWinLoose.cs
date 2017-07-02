@@ -10,6 +10,7 @@ public class PlayerWinLoose : MonoBehaviour
 	public Text textCounter;
 	public Text textWin;
     public Text textPoints;
+	public CanvasGroup diedText;
 
     public int defaultPoint = 100;
     private int currentScore = 0;
@@ -29,6 +30,14 @@ public class PlayerWinLoose : MonoBehaviour
     public void Die()
 	{
 		//Show Death UI and wait for a moment
+
+		StartCoroutine(DieDie());
+	}
+
+	IEnumerator DieDie()
+	{
+		diedText.alpha = 1;
+		yield return new WaitForSeconds(2);
 		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
 
