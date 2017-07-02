@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 82782997449136208}
   - component: {fileID: 114369499933451794}
   - component: {fileID: 114834315354010726}
+  - component: {fileID: 114179516936157044}
   m_Layer: 0
   m_Name: Medusa
   m_TagString: Player
@@ -1003,6 +1004,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114179516936157044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553601794582858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3904bb9db8b92934e9ae6e9b87f26170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369499933451794
 MonoBehaviour:
   m_ObjectHideFlags: 1
