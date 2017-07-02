@@ -6,10 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float pMovementDuration;
-    public Sprite pPlayerUp;
-    public Sprite pPlayerDown;
-    public Sprite pPlayerRight;
-    public Sprite pPlayerLeft;
+    //public Sprite pPlayerUp;
+    //public Sprite pPlayerDown;
+    //public Sprite pPlayerRight;
+    //public Sprite pPlayerLeft;
     public float audioPitchRange = 0.5f;
 
     private Vector3 mMovementVector;
@@ -20,11 +20,11 @@ public class PlayerMovement : MonoBehaviour
     private facingDirection mNextFacingDirection;
     private facingDirection mPlayerFacing;
 
-    private SpriteRenderer mSpriteRenderer;
+    //private SpriteRenderer mSpriteRenderer;
 
     private AudioSource myAudio;
     private PlayerWinLoose myWinLoose;
-    private Animator animator;
+    private Animator mAnimator;
 
     // Use this for initialization
     void Start()
@@ -34,10 +34,11 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
         mPlayerFacing = facingDirection.down;
 
-        mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        //mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         myAudio = GetComponent<AudioSource>();
         myWinLoose = GetComponent<PlayerWinLoose>();
+        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -150,7 +151,6 @@ public class PlayerMovement : MonoBehaviour
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
-                    PlayAnimation();
                 }
                 else
                 {
@@ -192,40 +192,45 @@ public class PlayerMovement : MonoBehaviour
             switch (mNextFacingDirection)
             {
                 case facingDirection.up:
-                    mSpriteRenderer.sprite = pPlayerUp;
+                    //mSpriteRenderer.sprite = pPlayerUp;
+                    mAnimator.SetBool("FacingUp", true);
+                    mAnimator.SetBool("FacingDown", false);
+                    mAnimator.SetBool("FacingRight", false);
+                    mAnimator.SetBool("FacingLeft", false);
+
                     mPlayerFacing = facingDirection.up;
                     break;
 
                 case facingDirection.down:
-                    mSpriteRenderer.sprite = pPlayerDown;
+                    //mSpriteRenderer.sprite = pPlayerDown;
+                    mAnimator.SetBool("FacingUp", false);
+                    mAnimator.SetBool("FacingDown", true);
+                    mAnimator.SetBool("FacingRight", false);
+                    mAnimator.SetBool("FacingLeft", false);
+
                     mPlayerFacing = facingDirection.down;
                     break;
 
                 case facingDirection.left:
-                    mSpriteRenderer.sprite = pPlayerLeft;
+                    //mSpriteRenderer.sprite = pPlayerLeft;
+                    mAnimator.SetBool("FacingUp", false);
+                    mAnimator.SetBool("FacingDown", false);
+                    mAnimator.SetBool("FacingRight", false);
+                    mAnimator.SetBool("FacingLeft", true);
+
                     mPlayerFacing = facingDirection.left;
                     break;
 
                 case facingDirection.right:
-                    mSpriteRenderer.sprite = pPlayerRight;
+                    //mSpriteRenderer.sprite = pPlayerRight;
+                    mAnimator.SetBool("FacingUp", false);
+                    mAnimator.SetBool("FacingDown", false);
+                    mAnimator.SetBool("FacingRight", true);
+                    mAnimator.SetBool("FacingLeft", false);
+
                     mPlayerFacing = facingDirection.right;
                     break;
             }
         }
     }
-
-    void PlayAnimation()
-    {
-        switch (mPlayerFacing)
-        {
-            case facingDirection.up:
-                //animator.Play("Medusa_move_up");
-                break;
-
-            case facingDirection.down:
-                //animator.Play("Medusa_move_down");
-                break;
-        }
-    }
-
 }
