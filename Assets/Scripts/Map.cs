@@ -17,7 +17,7 @@ public class Map : MonoBehaviour {
         GenerateDict();
         GenerateMap();
         mapBounds = new Rect(0, 0, mapBlueprint.width, mapBlueprint.height);
-        manager = new StatueManager();
+        manager = FindObjectOfType<StatueManager>();
     }
 
     private void GenerateDict()
