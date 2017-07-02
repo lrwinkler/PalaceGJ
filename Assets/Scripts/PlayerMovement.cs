@@ -151,7 +151,6 @@ public class PlayerMovement : MonoBehaviour
                 if (mGameMap.canPass(transform.localPosition + mMovementVector))
                 {
 
-                    //Debug.Log(mMovementVector);
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
@@ -174,8 +173,8 @@ public class PlayerMovement : MonoBehaviour
         float stepDuration = moveDuration / steps;
 
         float stepSize = 1.0f / steps;
-        //myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
-        //myAudio.Play();
+        myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
+        myAudio.Play();
         for (int i = 0; i <= steps; i++)
         {
             float lerpValue = i * stepSize;
@@ -188,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
     }
 
-    //Rotates player character by changing the used sprite.
+    //Rotates player character by changing the used animation.
     void ChangePlayerFacing()
     {
         if (mPlayerFacing != mNextFacingDirection)

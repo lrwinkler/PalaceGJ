@@ -37,7 +37,15 @@ public class EnemyAI : MonoBehaviour
         downAnimationChild = transform.Find("DownAnimation");
 	}
 
-	void MoveEnemy()
+    private void Update()
+    {
+        animator.SetBool("facingUp", false);
+        animator.SetBool("facingDown", false);
+        animator.SetBool("facingLeft", false);
+        animator.SetBool("facingRight", false);
+    }
+
+    void MoveEnemy()
 	{
 		StartCoroutine(LerpEnemy());
 	}
