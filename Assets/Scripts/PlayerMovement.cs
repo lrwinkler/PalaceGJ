@@ -219,11 +219,11 @@ public class PlayerMovement : MonoBehaviour
         switch (mPlayerFacing)
         {
             case facingDirection.up:
-                animator.Play("Medusa_move_up");
+                //animator.Play("Medusa_move_up");
                 break;
 
             case facingDirection.down:
-                animator.Play("Medusa_move_down");
+                //animator.Play("Medusa_move_down");
                 break;
         }
     }
