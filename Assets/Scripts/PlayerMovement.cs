@@ -174,8 +174,8 @@ public class PlayerMovement : MonoBehaviour
         float stepDuration = moveDuration / steps;
 
         float stepSize = 1.0f / steps;
-        //myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
-        //myAudio.Play();
+        myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
+        myAudio.Play();
         for (int i = 0; i <= steps; i++)
         {
             float lerpValue = i * stepSize;
