@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4465320512637012}
   - component: {fileID: 212060500605148678}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4579112725177474}
   - component: {fileID: 212615738721713292}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4391148144234962}
   - component: {fileID: 212713877938049342}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4022498736248156}
   - component: {fileID: 212394423726347622}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778267394057778}
   - component: {fileID: 212904747322753346}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280554595353864}
   - component: {fileID: 212885366438655772}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4837475598403490}
   - component: {fileID: 212487536504043816}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4948454253309508}
   - component: {fileID: 212789005903341756}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4362282121269984}
   - component: {fileID: 212181886253412768}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673319918386634}
   - component: {fileID: 212833285183979340}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4502059538399996}
   - component: {fileID: 212002129568778124}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318997789279310}
   - component: {fileID: 212490605206727556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4996806673676952}
   - component: {fileID: 212978712301152514}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4415300924575606}
   - component: {fileID: 212544122434806906}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4738395533584942}
   - component: {fileID: 212869747046449596}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280214715930572}
   - component: {fileID: 212613303670156674}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4875890942399402}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 114369499933451794}
   - component: {fileID: 114834315354010726}
   - component: {fileID: 111809528889577934}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Medusa
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4779851119698326}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4658169016862834}
   - component: {fileID: 212988229110343278}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4030869537498568}
   - component: {fileID: 212892173866542616}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4004953076156278}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4686160357700400}
   - component: {fileID: 212066333855470712}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4226394987821780}
   - component: {fileID: 212405503239084256}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_side_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4890733978614618}
   - component: {fileID: 212886927696658838}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4421152507420072}
   - component: {fileID: 212282264701350612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4954302270764116}
   - component: {fileID: 212217939578143002}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_back_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4765591933846902}
   - component: {fileID: 212053500225321896}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4273226631385304}
   - component: {fileID: 212055457169870042}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medusa_front_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
