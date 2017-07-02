@@ -295,7 +295,8 @@ GameObject:
   - component: {fileID: 82782997449136208}
   - component: {fileID: 114369499933451794}
   - component: {fileID: 114834315354010726}
-  - component: {fileID: 111809528889577934}
+  - component: {fileID: 114295549552541266}
+  - component: {fileID: 50874093441850686}
   m_Layer: 2
   m_Name: Medusa
   m_TagString: Player
@@ -882,6 +883,26 @@ Transform:
   m_Father: {fileID: 4875890942399402}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50874093441850686
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553601794582858}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61776616600808414
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1004,20 +1025,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &111809528889577934
-Animation:
+--- !u!114 &114295549552541266
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553601794582858}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3904bb9db8b92934e9ae6e9b87f26170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369499933451794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1030,10 +1048,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pMovementDuration: 0
-  pPlayerUp: {fileID: 0}
-  pPlayerDown: {fileID: 21300000, guid: 98995491cb4b19d469ee6c9b910245d3, type: 3}
-  pPlayerRight: {fileID: 21300000, guid: a7da3aeb2202aec489d8706fe7cb5020, type: 3}
-  pPlayerLeft: {fileID: 21300000, guid: 7cbbd227265fa08488c7d653636537c6, type: 3}
   audioPitchRange: 0.5
 --- !u!114 &114834315354010726
 MonoBehaviour:
@@ -1048,6 +1062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesPetrified: 0
   textCounter: {fileID: 0}
+  textWin: {fileID: 0}
 --- !u!212 &212002129568778124
 SpriteRenderer:
   m_ObjectHideFlags: 1
