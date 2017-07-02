@@ -162,7 +162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesPetrified: 0
   textCounter: {fileID: 0}
-  textWin: {fileID: 0}
 --- !u!114 &114862832726187052
 MonoBehaviour:
   m_ObjectHideFlags: 1

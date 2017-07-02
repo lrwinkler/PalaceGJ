@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite pPlayerDown;
     public Sprite pPlayerRight;
     public Sprite pPlayerLeft;
-	public float audioPitchRange = 0.5f;
+    public float audioPitchRange = 0.5f;
 
     private Vector3 mMovementVector;
     private bool mIsMoving;
@@ -22,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer mSpriteRenderer;
 
-	private AudioSource myAudio;
-	private PlayerWinLoose myWinLoose;
+    private AudioSource myAudio;
+    private PlayerWinLoose myWinLoose;
+    private Animator animator;
+
     // Use this for initialization
     void Start()
     {
@@ -34,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
         mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-		myAudio = GetComponent<AudioSource>();
-		myWinLoose = GetComponent<PlayerWinLoose>();
+        myAudio = GetComponent<AudioSource>();
+        myWinLoose = GetComponent<PlayerWinLoose>();
     }
 
     // Update is called once per frame
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingUp == facingDirection.up)
                     {
                         Debug.Log(hitDown.collider.name + " contact below!");
-						myWinLoose.Petrified();
+                        myWinLoose.Petrified();
                         hitDown.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -72,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
                     if (enemyFacingDown == facingDirection.down)
                     {
                         Debug.Log(hitUp.collider.name + " contact above!");
-						myWinLoose.Petrified();
+                        myWinLoose.Petrified();
                         hitUp.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -83,11 +85,11 @@ public class PlayerMovement : MonoBehaviour
                 if (hitLeft.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitLeft.collider.name);
-                    facingDirection enemyFacingRight = (PlayerMovement.facingDirection) hitLeft.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    facingDirection enemyFacingRight = (PlayerMovement.facingDirection)hitLeft.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingRight == facingDirection.right)
                     {
                         Debug.Log(hitLeft.collider.name + " contact left!");
-						myWinLoose.Petrified();
+                        myWinLoose.Petrified();
                         hitLeft.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -98,11 +100,11 @@ public class PlayerMovement : MonoBehaviour
                 if (hitRight.collider.name == "Soldier(Clone)")
                 {
                     //Debug.Log(hitRight.collider.name);
-                    facingDirection enemyFacingLeft = (PlayerMovement.facingDirection) hitRight.collider.GetComponent<EnemyAI>().GetFacingDirection();
+                    facingDirection enemyFacingLeft = (PlayerMovement.facingDirection)hitRight.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingLeft == facingDirection.left)
                     {
                         Debug.Log(hitRight.collider.name + " contact right!");
-						myWinLoose.Petrified();
+                        myWinLoose.Petrified();
                         hitRight.collider.GetComponent<EnemyAI>().Petrify();
                     }
                 }
@@ -143,11 +145,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (mGameMap.canPass(transform.localPosition + mMovementVector))
                 {
-                    //PlayAnimation()
+
                     //Debug.Log(mMovementVector);
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
+                    PlayAnimation();
                 }
                 else
                 {
@@ -167,8 +170,8 @@ public class PlayerMovement : MonoBehaviour
         float stepDuration = moveDuration / steps;
 
         float stepSize = 1.0f / steps;
-		//myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
-		//myAudio.Play();
+        //myAudio.pitch = Random.Range(1 - audioPitchRange, 1 + audioPitchRange);
+        //myAudio.Play();
         for (int i = 0; i <= steps; i++)
         {
             float lerpValue = i * stepSize;
@@ -210,4 +213,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    void PlayAnimation()
+    {
+        switch (mPlayerFacing)
+        {
+            case facingDirection.up:
+                animator.Play("Medusa_move_up");
+                break;
+
+            case facingDirection.down:
+                animator.Play("Medusa_move_down");
+                break;
+        }
+    }
+
 }
