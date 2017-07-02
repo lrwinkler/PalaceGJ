@@ -44,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mAnimator.SetBool("FacingUp", false);
+        mAnimator.SetBool("FacingDown", false);
+        mAnimator.SetBool("FacingRight", false);
+        mAnimator.SetBool("FacingLeft", false);
         MovementInput();
     }
 
