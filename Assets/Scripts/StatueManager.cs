@@ -31,4 +31,5 @@ public class StatueManager : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cameraTransform = mainCamera.transform;
     }
+
 }
