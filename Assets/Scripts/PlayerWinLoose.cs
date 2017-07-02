@@ -9,6 +9,7 @@ public class PlayerWinLoose : MonoBehaviour
 	public int enemiesPetrified = 0;
 	public Text textCounter;
 	public Text textWin;
+	public CanvasGroup textDie;
 
 	private EnemyGenerator enemyGen;
     private StatueManager statueManager;
@@ -24,7 +25,13 @@ public class PlayerWinLoose : MonoBehaviour
 
     public void Die()
 	{
-		//Show Death UI and wait for a moment
+		StartCoroutine(DoAndDie());
+	}
+
+	IEnumerator DoAndDie()
+	{
+		textDie.alpha = 1;
+		yield return new WaitForSeconds(2);
 		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
 
