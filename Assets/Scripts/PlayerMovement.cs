@@ -151,7 +151,6 @@ public class PlayerMovement : MonoBehaviour
                 if (mGameMap.canPass(transform.localPosition + mMovementVector))
                 {
 
-                    //Debug.Log(mMovementVector);
                     mIsMoving = true;
                     StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
                     ChangePlayerFacing();
@@ -188,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
         mIsMoving = false;
     }
 
-    //Rotates player character by changing the used sprite.
+    //Rotates player character by changing the used animation.
     void ChangePlayerFacing()
     {
         if (mPlayerFacing != mNextFacingDirection)
