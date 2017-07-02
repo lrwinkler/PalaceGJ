@@ -18,7 +18,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: FacingRight
     m_Type: 4
@@ -61,9 +61,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.0038117801
-  m_ExitTime: 1
+  m_TransitionDuration: 0.01823616
+  m_TransitionOffset: 0
+  m_ExitTime: 0.98176384
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -85,9 +85,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.017914832
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.98208517
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -109,9 +109,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.0038117801
-  m_ExitTime: 1
+  m_TransitionDuration: 0.00911808
+  m_TransitionOffset: 0
+  m_ExitTime: 0.9908819
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -133,9 +133,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.0016829389
-  m_ExitTime: 1
+  m_TransitionDuration: 0.00911808
+  m_TransitionOffset: 0
+  m_ExitTime: 0.9908819
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
