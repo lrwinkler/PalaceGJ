@@ -8,38 +8,48 @@ public class PlayerWinLoose : MonoBehaviour
 {
 	public int enemiesPetrified = 0;
 	public Text textCounter;
-	//public Text textWin;
+	public Text textWin;
 
 	private EnemyGenerator enemyGen;
+    private StatueManager statueManager;
 	// Use this for initialization
 	void Start () 
 	{
-		enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();	
-	}
+		enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();
+        StartCoroutine(win());
+    }
 
 	void Update()
-	{
+	{   
+    }
 
-	}
-	
-	public void Die()
+    public void Die()
 	{
 		//Show Death UI and wait for a moment
 		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 	}
-	//public void Win()
-	//{
-	//	Debug.Log("Win!");
-	//	textWin.enabled = true;
-	//}
 
-	public void Petrified()
+    IEnumerator win()
+    {
+        textWin.enabled = true;
+        yield return new WaitForSeconds(2.5f);
+        textWin.enabled = false;
+        newWave();
+    }
+
+    public void Petrified()
 	{
 		enemiesPetrified++;
 		textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn - enemiesPetrified);
 		if(enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
 		{
-			//Initiate scoring screen
-		}
+            //Initiate scoring screen
+            statueManager.startDeletingSequence();
+        }
 	}
+
+    public void newWave()
+    {
+        enemyGen.SpawnEnemies(enemiesPetrified + enemyGen.howManyToAdd);
+    }
 }

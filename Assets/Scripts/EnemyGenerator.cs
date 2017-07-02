@@ -22,7 +22,7 @@ public class EnemyGenerator : MonoBehaviour {
 		SpawnEnemies(numOfEnemiesToSpawn);
 	}
 
-	void  SpawnEnemies(int howMany)
+	public void SpawnEnemies(int howMany)
 	{
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
