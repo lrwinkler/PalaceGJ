@@ -98,10 +98,7 @@ public class EnemyAI : MonoBehaviour
                         downAnimationChild.gameObject.SetActive(false);
                         upAnimationChild.gameObject.SetActive(true);
 
-                        animator.SetBool("facingRight", false);
-                        animator.SetBool("facingLeft", false);
-                        animator.SetBool("facingUp", true);
-                        animator.SetBool("facingDown", false);
+                        //animator.Play("Soldier_walk_up", 0);
                         break;
 
                     case facingDirection.down:
@@ -111,10 +108,7 @@ public class EnemyAI : MonoBehaviour
                         downAnimationChild.gameObject.SetActive(true);
                         upAnimationChild.gameObject.SetActive(false);
 
-                        animator.SetBool("facingRight", false);
-                        animator.SetBool("facingLeft", false);
-                        animator.SetBool("facingUp", false);
-                        animator.SetBool("facingDown", true);
+                        //animator.Play("Soldier_walk_down", 0);
                         break;
 
                     case facingDirection.left:
@@ -124,10 +118,7 @@ public class EnemyAI : MonoBehaviour
                         downAnimationChild.gameObject.SetActive(false);
                         upAnimationChild.gameObject.SetActive(false);
 
-                        animator.SetBool("facingRight", false);
-                        animator.SetBool("facingLeft", true);
-                        animator.SetBool("facingUp", false);
-                        animator.SetBool("facingDown", false);
+                        //animator.Play("Soldier_walk_left", 0);
                         break;
 
                     case facingDirection.right:
@@ -137,10 +128,7 @@ public class EnemyAI : MonoBehaviour
                         downAnimationChild.gameObject.SetActive(false);
                         upAnimationChild.gameObject.SetActive(false);
 
-                        animator.SetBool("facingRight", true);
-                        animator.SetBool("facingLeft", false);
-                        animator.SetBool("facingUp", false);
-                        animator.SetBool("facingDown", false);
+                        //animator.Play("Soldier_walk_right", 0);
                         break;
                 }
             }
