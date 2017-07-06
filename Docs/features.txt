@@ -1,0 +1,12 @@
+FEATURES TO IMPLEMENT
+~~~~~~~~~~~~~~~~~~~~~~
+
+1. Game Over when blocked in completely.
+2. Change enemy death sound to one more fitting petrification.
+3. Selling of statues after each wave and auction screen.
+4. Menu splash artwork, gameover(enemy attack), gameover(starvation).
+
+Proposals:
+
+1. Enemy AI switches to following when player is spotted
+2. Add the ability to draw attention of nearby enemies.

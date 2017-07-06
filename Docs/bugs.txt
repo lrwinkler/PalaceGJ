@@ -1,0 +1,5 @@
+BUGS TO FIX
+~~~~~~~~~~~~
+
+1. Medusa's eyes don't display properly when walking left/right.
+2. When soldiers are petrified during movement the statue sprite shows up between tiles but it blocks the tile of origin.
