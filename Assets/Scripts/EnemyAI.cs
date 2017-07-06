@@ -169,8 +169,14 @@ public class EnemyAI : MonoBehaviour
 
     public void Petrify()
     {
-        //get coordinates
-        gameMap.spawnStatue(1, transform.position);
+        //get coordinates and round them
+        Vector3 enemyCoords;
+
+        enemyCoords.x = Mathf.Round(transform.position.x);
+        enemyCoords.y = Mathf.Round(transform.position.y);
+        enemyCoords.z = Mathf.Round(transform.position.z);
+
+        gameMap.spawnStatue(1, enemyCoords);
         myAudio.Play();
 		transform.localScale = Vector3.zero;
         Destroy(gameObject, myAudio.clip.length);

@@ -1,5 +1,10 @@
 BUGS TO FIX
 ~~~~~~~~~~~~
 
-1. Medusa's eyes don't display properly when walking left/right.
-2. When soldiers are petrified during movement the statue sprite shows up between tiles but it blocks the tile of origin.
+FIXED Medusa's eyes don't display properly when walking left/right.
+
+FIXED When soldiers are petrified during movement the statue sprite shows up between tiles but it blocks the tile of origin.
+
+- Game Over doesn't take control away from player, can still "Win" after dying (The YOU WIN message is still displayed)
+
+- Enemies sometimes spawn on top of the player if he moves while the YOU WIN message is displayed, resulting in instant death. (probably going to be fixed when selling screen is implemented)
