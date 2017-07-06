@@ -11,6 +11,7 @@ public class PlayerWinLoose : MonoBehaviour
 	public Text textWin;
     public Text textPoints;
 	public CanvasGroup diedText;
+    public Text gameOverText;
 
     public int defaultPoint = 100;
     public int proximityBonus = 50;
@@ -37,15 +38,19 @@ public class PlayerWinLoose : MonoBehaviour
 
 	IEnumerator DieDie()
 	{
-		diedText.alpha = 1;
+        GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
+        gameOverText.text = "YOU DIED\nFinal Score: " + currentScore;
+        diedText.alpha = 1;
 		yield return new WaitForSeconds(2);
-		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Level0");
 	}
 
     IEnumerator win()
     {
+        GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
         textWin.enabled = true;
         yield return new WaitForSeconds(2.5f);
+        GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = true;
         textWin.enabled = false;
         newWave();
     }
