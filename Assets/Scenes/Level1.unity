@@ -246,6 +246,16 @@ Prefab:
       propertyPath: diedText
       value: 
       objectReference: {fileID: 573552414}
+    - target: {fileID: 212490605206727556, guid: 3861e756aebb0434d8bd9442355db4a3,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 212978712301152514, guid: 3861e756aebb0434d8bd9442355db4a3,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3861e756aebb0434d8bd9442355db4a3, type: 2}
   m_IsPrefabParent: 0
