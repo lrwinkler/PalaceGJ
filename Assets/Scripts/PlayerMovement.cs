@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         myAudio = GetComponent<AudioSource>();
         myWinLoose = GetComponent<PlayerWinLoose>();
         mAnimator = GetComponent<Animator>();
+        mAnimator.SetBool("IsDead", false);
     }
 
     // Update is called once per frame

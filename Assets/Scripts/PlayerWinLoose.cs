@@ -19,14 +19,16 @@ public class PlayerWinLoose : MonoBehaviour
 
 	private EnemyGenerator enemyGen;
     private StatueManager statueManager;
+    private Animator medusaAnimator;
 	// Use this for initialization
 	void Start () 
 	{
 		enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();
+        medusaAnimator = GameObject.Find("Medusa").GetComponent<Animator>();
     }
 
 	void Update()
-	{   
+	{
     }
 
     public void Die()
@@ -39,6 +41,17 @@ public class PlayerWinLoose : MonoBehaviour
 	IEnumerator DieDie()
 	{
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.Find("Medusa").GetComponent<BoxCollider2D>().enabled = false;
+
+        medusaAnimator.SetBool("FacingUp", false);
+        medusaAnimator.SetBool("FacingDown", false);
+        medusaAnimator.SetBool("FacingRight", false);
+        medusaAnimator.SetBool("FacingLeft", false);
+        medusaAnimator.SetBool("IsDead", true);
+        yield return new WaitForSeconds(0.1f);
+        medusaAnimator.SetBool("IsDead", false);
+        yield return new WaitForSeconds(2);
+
         gameOverText.text = "YOU DIED\nFinal Score: " + currentScore;
         diedText.alpha = 1;
 		yield return new WaitForSeconds(2);
