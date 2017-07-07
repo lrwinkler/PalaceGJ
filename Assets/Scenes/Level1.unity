@@ -667,7 +667,7 @@ Prefab:
         type: 2}
       propertyPath: mapBlueprint
       value: 
-      objectReference: {fileID: 2800000, guid: 76bec2c3bb9a4a046bf36e7aef27afcc, type: 3}
+      objectReference: {fileID: 2800000, guid: e77f513a7bae479478b27149d865e36f, type: 3}
     - target: {fileID: 114569236342716232, guid: f7dbe57fc75be6d4196dce9b2fdc18a1,
         type: 2}
       propertyPath: spawnInLocalCoordinates
@@ -949,6 +949,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1466467204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1466467195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214413ca2c3e665409d681089b3bc236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugTile: {fileID: 1087068123080946, guid: 82fe3df5bc8147d46a5065a886c7d900, type: 2}
 --- !u!1 &1905650391
 GameObject:
   m_ObjectHideFlags: 0

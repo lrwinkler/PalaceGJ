@@ -4,42 +4,45 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerWinLoose : MonoBehaviour 
+public class PlayerWinLoose : MonoBehaviour
 {
-	int enemiesPetrified = 0;
-	public Text textCounter;
-	public Text textWin;
+    int enemiesPetrified = 0;
+    public Text textCounter;
+    public Text textWin;
     public Text textPoints;
-	public CanvasGroup diedText;
+    public CanvasGroup diedText;
     public Text gameOverText;
 
     public int defaultPoint = 100;
     public int proximityBonus = 50;
     private int currentScore = 0;
 
-	private EnemyGenerator enemyGen;
+    private EnemyGenerator enemyGen;
     private StatueManager statueManager;
     private Animator medusaAnimator;
-	// Use this for initialization
-	void Start () 
-	{
-		enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();
+    private Pathfinding pathfinding;
+
+    // Use this for initialization
+    void Start()
+    {
+        enemyGen = GameObject.FindObjectOfType<EnemyGenerator>();
         medusaAnimator = GameObject.Find("Medusa").GetComponent<Animator>();
+        pathfinding = GameObject.Find("Medusa").GetComponent<Pathfinding>();
     }
 
-	void Update()
-	{
+    void Update()
+    {
     }
 
-    public void Die()
-	{
-		//Show Death UI and wait for a moment
+    public void Die(bool starved)
+    {
+        //Show Death UI and wait for a moment
 
-		StartCoroutine(DieDie());
-	}
+        StartCoroutine(DieDie(starved));
+    }
 
-	IEnumerator DieDie()
-	{
+    IEnumerator DieDie(bool starved)
+    {
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
         GameObject.Find("Medusa").GetComponent<BoxCollider2D>().enabled = false;
 
@@ -52,11 +55,18 @@ public class PlayerWinLoose : MonoBehaviour
         medusaAnimator.SetBool("IsDead", false);
         yield return new WaitForSeconds(2);
 
-        gameOverText.text = "YOU DIED\nFinal Score: " + currentScore;
+        if (starved)
+        {
+            gameOverText.text = "YOU STARVED\nFinal Score: " + currentScore;
+        }
+        else
+        {
+            gameOverText.text = "YOU DIED\nFinal Score: " + currentScore;
+        }
         diedText.alpha = 1;
-		yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Level0");
-	}
+    }
 
     IEnumerator win()
     {
@@ -69,15 +79,20 @@ public class PlayerWinLoose : MonoBehaviour
     }
 
     public void Petrified(float distance)
-	{
-		enemiesPetrified++;
+    {
+        enemiesPetrified++;
         updateScore(distance);
-        Debug.Log(distance);
-		if(enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
-		{
+        //Debug.Log(distance);
+        if (enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
+        {
             //Initiate scoring screen
             StartCoroutine(win());
         }
+        else if (pathfinding.IsBlockedIn())
+        {
+            Die(true);
+        }
+
     }
 
     void updateScore(float distance)

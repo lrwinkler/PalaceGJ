@@ -3,8 +3,9 @@ FEATURES TO IMPLEMENT
 
 1. Game Over when blocked in completely.
 2. Change enemy death sound to one more fitting petrification.
-3. Selling of statues after each wave and auction screen.
-4. Menu splash artwork, gameover(enemy attack), gameover(starvation).
+3. Change statue to reflect enemy animation during petrification.
+4. Selling of statues after each wave and auction screen.
+5. Menu splash artwork, gameover(enemy attack), gameover(starvation).
 
 Proposals:
 

@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
                     facingDirection enemyFacingUp = (PlayerMovement.facingDirection)hitDown.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingUp == facingDirection.up)
                     {
-                        Debug.Log(hitDown.collider.name + " contact below!");
-                        myWinLoose.Petrified(hitDown.distance);
+                        //Debug.Log(hitDown.collider.name + " contact below!");                        
                         hitDown.collider.GetComponent<EnemyAI>().Petrify();
+                        myWinLoose.Petrified(hitDown.distance);
                     }
                 }
                 break;
@@ -81,9 +81,9 @@ public class PlayerMovement : MonoBehaviour
                     facingDirection enemyFacingDown = (PlayerMovement.facingDirection)hitUp.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingDown == facingDirection.down)
                     {
-                        Debug.Log(hitUp.collider.name + " contact above!");
-                        myWinLoose.Petrified(hitUp.distance);
+                        //Debug.Log(hitUp.collider.name + " contact above!");                        
                         hitUp.collider.GetComponent<EnemyAI>().Petrify();
+                        myWinLoose.Petrified(hitUp.distance);
                     }
                 }
                 break;
@@ -97,9 +97,9 @@ public class PlayerMovement : MonoBehaviour
                     facingDirection enemyFacingRight = (PlayerMovement.facingDirection)hitLeft.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingRight == facingDirection.right)
                     {
-                        Debug.Log(hitLeft.collider.name + " contact left!");
-                        myWinLoose.Petrified(hitLeft.distance);
+                        //Debug.Log(hitLeft.collider.name + " contact left!");                        
                         hitLeft.collider.GetComponent<EnemyAI>().Petrify();
+                        myWinLoose.Petrified(hitLeft.distance);
                     }
                 }
                 break;
@@ -113,9 +113,9 @@ public class PlayerMovement : MonoBehaviour
                     facingDirection enemyFacingLeft = (PlayerMovement.facingDirection)hitRight.collider.GetComponent<EnemyAI>().GetFacingDirection();
                     if (enemyFacingLeft == facingDirection.left)
                     {
-                        Debug.Log(hitRight.collider.name + " contact right!");
-                        myWinLoose.Petrified(hitRight.distance);
+                        //Debug.Log(hitRight.collider.name + " contact right!");                        
                         hitRight.collider.GetComponent<EnemyAI>().Petrify();
+                        myWinLoose.Petrified(hitRight.distance);
                     }
                 }
                 break;

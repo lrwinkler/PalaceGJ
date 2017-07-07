@@ -187,7 +187,7 @@ public class EnemyAI : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Player")
 		{
-			other.GetComponent<PlayerWinLoose>().Die();
+			other.GetComponent<PlayerWinLoose>().Die(false);
 		}
 
 	}
