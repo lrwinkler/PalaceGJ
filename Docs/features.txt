@@ -3,7 +3,7 @@ FEATURES TO IMPLEMENT
 
 DONE Game Over when blocked in completely.
 
-Change enemy death sound to one more fitting petrification.
+DONE Change enemy death sound to one more fitting petrification.
 
 Add enemy attack animation.
 
