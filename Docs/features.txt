@@ -5,7 +5,9 @@ DONE Game Over when blocked in completely.
 
 Change enemy death sound to one more fitting petrification.
 
-Change statue to reflect enemy animation during petrification.
+Add enemy attack animation.
+
+Change statue to reflect enemy animation during petrification, change scoring system to match.
 
 Selling of statues after each wave and auction screen.
 
