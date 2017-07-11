@@ -16,11 +16,14 @@ public class PlayerWinLoose : MonoBehaviour
     public int defaultPoint = 100;
     public int proximityBonus = 50;
     private int currentScore = 0;
+    private int statuesSold = 0;
+    public int statuesToSell = 2;
 
     private EnemyGenerator enemyGen;
     private StatueManager statueManager;
     private Animator medusaAnimator;
     private Pathfinding pathfinding;
+    private SelectorControl selectorControl;
 
     // Use this for initialization
     void Start()
@@ -71,6 +74,7 @@ public class PlayerWinLoose : MonoBehaviour
     IEnumerator win()
     {
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
+        //StatueSelling();
         textWin.enabled = true;
         yield return new WaitForSeconds(2.5f);
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = true;
@@ -108,5 +112,12 @@ public class PlayerWinLoose : MonoBehaviour
         enemyGen.SpawnEnemies(enemyGen.numOfEnemiesToSpawn);
         textCounter.text = "ENEMIES LEFT: " + (enemyGen.numOfEnemiesToSpawn);
         enemiesPetrified = 0;
+    }
+
+    public void StatueSelling()
+    {
+        GameObject selector = Instantiate(Resources.Load<GameObject>("Selector"));
+        selectorControl = selector.GetComponent<SelectorControl>();
+        selectorControl.Select();        
     }
 }
