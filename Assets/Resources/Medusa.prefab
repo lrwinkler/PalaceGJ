@@ -296,7 +296,8 @@ GameObject:
   - component: {fileID: 114369499933451794}
   - component: {fileID: 114834315354010726}
   - component: {fileID: 114295549552541266}
-  - component: {fileID: 50874093441850686}
+  - component: {fileID: 50196791483442994}
+  - component: {fileID: 114026164665140840}
   m_Layer: 2
   m_Name: Medusa
   m_TagString: Player
@@ -883,7 +884,7 @@ Transform:
   m_Father: {fileID: 4875890942399402}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50874093441850686
+--- !u!50 &50196791483442994
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -1025,6 +1026,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114026164665140840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553601794582858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214413ca2c3e665409d681089b3bc236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugTile: {fileID: 1087068123080946, guid: 82fe3df5bc8147d46a5065a886c7d900, type: 2}
 --- !u!114 &114295549552541266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1060,9 +1073,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ede71e87a325046a3ba7f792c81aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPetrified: 0
   textCounter: {fileID: 0}
   textWin: {fileID: 0}
+  textPoints: {fileID: 0}
+  diedText: {fileID: 0}
+  gameOverText: {fileID: 0}
+  defaultPoint: 100
+  proximityBonus: 50
+  statuesToSell: 2
 --- !u!212 &212002129568778124
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1545,7 +1563,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300002, guid: e9cd453bbbba0164fadacfa7ae6406a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2037,7 +2055,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300010, guid: e9cd453bbbba0164fadacfa7ae6406a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

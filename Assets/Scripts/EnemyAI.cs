@@ -102,11 +102,7 @@ public class EnemyAI : MonoBehaviour
 
                         pEnemyFacing = facingDirection.up;
 
-                        horizontalAnimationChild.gameObject.SetActive(false);
-                        downAnimationChild.gameObject.SetActive(false);
-                        upAnimationChild.gameObject.SetActive(true);
-
-						animator.SetBool("facingUp", true);
+                        animator.SetBool("facingUp", true);
 						animator.SetBool("facingDown", false);
 						animator.SetBool("facingLeft", false);
 						animator.SetBool("facingRight", false);
@@ -115,11 +111,7 @@ public class EnemyAI : MonoBehaviour
                     case facingDirection.down:
 
                         pEnemyFacing = facingDirection.down;
-                        horizontalAnimationChild.gameObject.SetActive(false);
-                        downAnimationChild.gameObject.SetActive(true);
-                        upAnimationChild.gameObject.SetActive(false);
-
-						
+                        						
 						animator.SetBool("facingUp", false);
 						animator.SetBool("facingDown", true);
 						animator.SetBool("facingLeft", false);
@@ -129,11 +121,7 @@ public class EnemyAI : MonoBehaviour
                     case facingDirection.left:
 
                         pEnemyFacing = facingDirection.left;
-                        horizontalAnimationChild.gameObject.SetActive(true);
-                        downAnimationChild.gameObject.SetActive(false);
-                        upAnimationChild.gameObject.SetActive(false);
-
-						
+                        						
 						animator.SetBool("facingUp", false);
 						animator.SetBool("facingDown", false);
 						animator.SetBool("facingLeft", true);
@@ -143,11 +131,7 @@ public class EnemyAI : MonoBehaviour
                     case facingDirection.right:
 
                         pEnemyFacing = facingDirection.right;
-                        horizontalAnimationChild.gameObject.SetActive(true);
-                        downAnimationChild.gameObject.SetActive(false);
-                        upAnimationChild.gameObject.SetActive(false);
-
-						
+                        						
 						animator.SetBool("facingUp", false);
 						animator.SetBool("facingDown", false);
 						animator.SetBool("facingLeft", false);
@@ -176,7 +160,36 @@ public class EnemyAI : MonoBehaviour
         enemyCoords.y = Mathf.Round(transform.position.y);
         enemyCoords.z = Mathf.Round(transform.position.z);
 
-        gameMap.spawnStatue(1, enemyCoords);
+        string animationState = "";
+
+        AnimatorStateInfo animationInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animationInfo.IsName("Soldier_walk_left"))
+        {
+            animationState = "Soldier_walk_left";
+        }
+
+        if (animationInfo.IsName("Soldier_walk_right"))
+        {
+            animationState = "Soldier_walk_right";
+        }
+
+        if (animationInfo.IsName("Soldier_walk_up"))
+        {
+            animationState = "Soldier_walk_up";
+        }
+
+        if (animationInfo.IsName("Soldier_walk_down"))
+        {
+            animationState = "Soldier_walk_down";
+        }
+
+        Debug.Log(animationState);
+
+        float animationFrame = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
+        Debug.Log(animationState);
+
+        gameMap.spawnStatue(1, enemyCoords, animationFrame, animationState);
         myAudio.Play();
 		transform.localScale = Vector3.zero;
         Destroy(gameObject, myAudio.clip.length);

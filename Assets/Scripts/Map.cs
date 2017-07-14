@@ -75,17 +75,47 @@ public class Map : MonoBehaviour {
         return false;
     }
 
-    public void spawnStatue(int quality, Vector3 point)
+    public void spawnStatue(int quality, Vector3 point, float animationFrame, string animationState)
     {
         GameObject statue = Instantiate(Resources.Load<GameObject>("Statue"), point, Quaternion.identity, this.transform);
 		mapBlueprint.SetPixel((int) point.x,(int) point.y, Color.green);
         manager.add(statue);
+
+        Animator statueAnimator = statue.GetComponent<Animator>();
+
+        statueAnimator.CrossFade(animationState, 0f, 0, animationFrame);
+        statueAnimator.speed = 0;
+
+        statueAnimator.SetBool("facingUp", false);
+        statueAnimator.SetBool("facingDown", false);
+        statueAnimator.SetBool("facingLeft", false);
+        statueAnimator.SetBool("facingRight", false);
+
+        Transform horizontalSprite = statue.transform.Find("HorizontalAnimation");
+        Transform upSprite = statue.transform.Find("UpAnimation");
+        Transform downSprite = statue.transform.Find("DownAnimation");
+
+
+
+        foreach (Transform child in horizontalSprite)
+        {
+            child.GetComponent<SpriteRenderer>().color = Color.grey;
+        }
+
+        foreach (Transform child in upSprite)
+        {
+            child.GetComponent<SpriteRenderer>().color = Color.grey;
+        }
+
+        foreach (Transform child in downSprite)
+        {
+            child.GetComponent<SpriteRenderer>().color = Color.grey;
+        }
     }
 
     public void removeStatue(Vector3 point)
     {
 		mapBlueprint.SetPixel((int)point.x, (int)point.y, Color.yellow);
 		manager.Remove(point);
-    } 
-
+    }
 }

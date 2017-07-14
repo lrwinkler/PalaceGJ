@@ -12,3 +12,5 @@ FIXED Enemies sometimes spawn on top of the player if he moves while the YOU WIN
 Enemy can spawn very close to player at beginning, making death very likely
 
 Enemies can spawn on top of each other and sometimes stack.
+
+Player can walk into enemy while petrifying him, resulting in the player and the newly created statue overlapping.
