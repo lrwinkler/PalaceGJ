@@ -2,96 +2,126 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour 
+public class EnemyAI : MonoBehaviour
 {
-	public float movementDelay = 1;
-	public float steps = 10;
-	public float stepDuration = 0.001f;
+    public float movementDelay = 1;
+    public float steps = 10;
+    public float stepDuration = 0.001f;
 
-	private Vector3 currentDirection;
-	private Map gameMap;
-	private float moveStep;
+    private Vector3 currentDirection;
+    private Vector3 currentEnemyPosition;
+    private GameObject player;
+    private Vector3 currentPlayerPosition;
+    private Map gameMap;
+    private float moveStep;
 
-	public enum facingDirection { up, down, left, right };
-	private facingDirection mNextFacingDirection;
-	public facingDirection pEnemyFacing;
+    public enum facingDirection { up, down, left, right };
+    private facingDirection mNextFacingDirection;
+    public facingDirection pEnemyFacing;
 
-	private AudioSource myAudio;
+    private AudioSource myAudio;
 
     private Animator animator;
 
     private Transform horizontalAnimationChild;
     private Transform upAnimationChild;
     private Transform downAnimationChild;
-	// Use this for initialization
-	void Start () 
-	{
-		moveStep = 1 / steps;
-		gameMap = FindObjectOfType<Map>();
-        InvokeRepeating("MoveEnemy", 0, movementDelay);
-		pEnemyFacing = facingDirection.down;
-		myAudio = GetComponent<AudioSource>();
+
+    private float timer;
+    // Use this for initialization
+    void Start()
+    {
+        timer = 1;
+        moveStep = 1 / steps;
+        gameMap = FindObjectOfType<Map>();
+        //InvokeRepeating("MoveEnemy", 0, movementDelay);
+        pEnemyFacing = facingDirection.down;
+        myAudio = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         horizontalAnimationChild = transform.Find("HorizontalAnimation");
         upAnimationChild = transform.Find("UpAnimation");
         downAnimationChild = transform.Find("DownAnimation");
-	}
+        player = GameObject.Find("Medusa");
+    }
 
     private void Update()
     {
+        currentEnemyPosition = transform.position;
+        currentPlayerPosition = player.transform.position;
+        //animator.SetBool("isAttacking", false);
+        animator.SetBool("finishedAttacking", false);
         animator.SetBool("facingUp", false);
         animator.SetBool("facingDown", false);
         animator.SetBool("facingLeft", false);
         animator.SetBool("facingRight", false);
+
+        timer += Time.deltaTime;
+
+        if (animator.GetBool("isAttacking") == false)
+        {
+            if ((currentEnemyPosition + Vector3.right == currentPlayerPosition && pEnemyFacing == facingDirection.right)
+                || (currentEnemyPosition + Vector3.up == currentPlayerPosition && pEnemyFacing == facingDirection.up)
+                || (currentEnemyPosition + Vector3.down == currentPlayerPosition && pEnemyFacing == facingDirection.down)
+                || (currentEnemyPosition + Vector3.left == currentPlayerPosition && pEnemyFacing == facingDirection.left))
+            {
+                animator.SetBool("isAttacking", true);
+            }
+            else if (timer >= movementDelay)
+            {
+                MoveEnemy();
+
+                timer = 0;
+            }
+        }
     }
 
     void MoveEnemy()
-	{
-		StartCoroutine(LerpEnemy());
-	}
+    {
+        StartCoroutine(LerpEnemy());
+    }
 
-	IEnumerator LerpEnemy()
-	{
-		currentDirection = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
+    IEnumerator LerpEnemy()
+    {
+        currentDirection = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
 
-		//No movement in both axis at once!!
-		if (currentDirection.x != 0 && currentDirection.y != 0)
-		{
-			currentDirection.y = 0;
-		}
-		//Move if it's free tile.
-		if (gameMap != null)
-		{
-			if (gameMap.canPass(new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z)))
-			{
-				if (currentDirection.x == 1)
-					mNextFacingDirection = facingDirection.right;
-				else if (currentDirection.x == -1)
-					mNextFacingDirection = facingDirection.left;
-				else if (currentDirection.y == 1)
-					mNextFacingDirection = facingDirection.up;
-				else if (currentDirection.y == -1)
-					mNextFacingDirection = facingDirection.down;
-				ChangePlayerFacing();
-				Vector3 newDirection = new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z);
-				Vector3 oldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-				for (int i = 0; i <= steps; i++)
-				{
-					//Debug.Log(oldPosition);
-					transform.position = Vector3.Lerp(oldPosition, newDirection, moveStep*i);
-					yield return new WaitForSeconds(stepDuration);
-				}
-			}
-			else
-			{
-				MoveEnemy();
-			}
-		}
-		yield return new WaitForSeconds(0);
-	}
+        //No movement in both axis at once!!
+        if (currentDirection.x != 0 && currentDirection.y != 0)
+        {
+            currentDirection.y = 0;
+        }
+        //Move if it's free tile.
+        if (gameMap != null)
+        {
+            if (gameMap.canPass(new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z)))
+            {
+                if (currentDirection.x == 1)
+                    mNextFacingDirection = facingDirection.right;
+                else if (currentDirection.x == -1)
+                    mNextFacingDirection = facingDirection.left;
+                else if (currentDirection.y == 1)
+                    mNextFacingDirection = facingDirection.up;
+                else if (currentDirection.y == -1)
+                    mNextFacingDirection = facingDirection.down;
+                ChangePlayerFacing();
+                Vector3 newDirection = new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z);
+                Vector3 oldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                for (int i = 0; i <= steps; i++)
+                {
+                    //Debug.Log(oldPosition);
+                    transform.position = Vector3.Lerp(oldPosition, newDirection, moveStep * i);
+                    yield return new WaitForSeconds(stepDuration);
+                }
+            }
+            else
+            {
+                MoveEnemy();
+            }
+        }
+        yield return new WaitForSeconds(0);
+    }
 
-	void ChangePlayerFacing()
-	{
+    void ChangePlayerFacing()
+    {
         if (horizontalAnimationChild != null && upAnimationChild != null && downAnimationChild != null)
         {
             if (pEnemyFacing != mNextFacingDirection)
@@ -103,39 +133,39 @@ public class EnemyAI : MonoBehaviour
                         pEnemyFacing = facingDirection.up;
 
                         animator.SetBool("facingUp", true);
-						animator.SetBool("facingDown", false);
-						animator.SetBool("facingLeft", false);
-						animator.SetBool("facingRight", false);
+                        animator.SetBool("facingDown", false);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingRight", false);
                         break;
 
                     case facingDirection.down:
 
                         pEnemyFacing = facingDirection.down;
-                        						
-						animator.SetBool("facingUp", false);
-						animator.SetBool("facingDown", true);
-						animator.SetBool("facingLeft", false);
-						animator.SetBool("facingRight", false);
+
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", true);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingRight", false);
                         break;
 
                     case facingDirection.left:
 
                         pEnemyFacing = facingDirection.left;
-                        						
-						animator.SetBool("facingUp", false);
-						animator.SetBool("facingDown", false);
-						animator.SetBool("facingLeft", true);
-						animator.SetBool("facingRight", false);
+
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", false);
+                        animator.SetBool("facingLeft", true);
+                        animator.SetBool("facingRight", false);
                         break;
 
                     case facingDirection.right:
 
                         pEnemyFacing = facingDirection.right;
-                        						
-						animator.SetBool("facingUp", false);
-						animator.SetBool("facingDown", false);
-						animator.SetBool("facingLeft", false);
-						animator.SetBool("facingRight", true);
+
+                        animator.SetBool("facingUp", false);
+                        animator.SetBool("facingDown", false);
+                        animator.SetBool("facingLeft", false);
+                        animator.SetBool("facingRight", true);
                         break;
                 }
             }
@@ -144,7 +174,7 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log("It done fucked up!");
         }
-	}
+    }
 
     public facingDirection GetFacingDirection()
     {
@@ -191,17 +221,75 @@ public class EnemyAI : MonoBehaviour
 
         gameMap.spawnStatue(1, enemyCoords, animationFrame, animationState);
         myAudio.Play();
-		transform.localScale = Vector3.zero;
+        transform.localScale = Vector3.zero;
         Destroy(gameObject, myAudio.clip.length);
         //display statue
     }
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.tag == "Player")
-		{
-			other.GetComponent<PlayerWinLoose>().Die(false);
-		}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.GetComponent<PlayerWinLoose>().Die(false);
+        }
 
-	}
+    }
+
+    void AttackFinish()
+    {
+        switch(pEnemyFacing)
+        {
+            case facingDirection.down:
+                if (currentEnemyPosition + Vector3.down == currentPlayerPosition)
+                {
+                    player.GetComponent<PlayerWinLoose>().Die(false);
+                }
+                break;
+
+            case facingDirection.up:
+                if (currentEnemyPosition + Vector3.up == currentPlayerPosition)
+                {
+                    player.GetComponent<PlayerWinLoose>().Die(false);
+                }
+                break;
+
+            case facingDirection.left:
+                if (currentEnemyPosition + Vector3.left == currentPlayerPosition)
+                {
+                    player.GetComponent<PlayerWinLoose>().Die(false);
+                }
+                break;
+
+            case facingDirection.right:
+                if (currentEnemyPosition + Vector3.right == currentPlayerPosition)
+                {
+                    player.GetComponent<PlayerWinLoose>().Die(false);
+                }
+                break;
+        }
+    }
+
+    void AttackAnimationFinish()
+    {
+        animator.SetBool("isAttacking", false);
+
+        switch(pEnemyFacing)
+        {
+            case facingDirection.down:
+                animator.SetBool("facingDown", true);
+                break;
+
+            case facingDirection.up:
+                animator.SetBool("facingUp", true);
+                break;
+
+            case facingDirection.left:
+                animator.SetBool("facingLeft", true);
+                break;
+
+            case facingDirection.right:
+                animator.SetBool("facingRight", true);
+                break;
+        }
+    }
 }

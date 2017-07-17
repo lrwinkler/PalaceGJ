@@ -13,9 +13,7 @@ Change scoring system to match animation frame.
 
 Selling of statues after each wave and auction screen.
 
-Menu splash artwork, gameover(enemy attack), gameover(starvation).
-
-Proposals:
+Artwork: menu, splash, gameover(enemy attack), gameover(starvation).
 
 Enemy AI switches to following when player is spotted
 
