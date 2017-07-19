@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     //public Sprite pPlayerLeft;
     public float audioPitchRange = 0.5f;
 
+    private List<Vector3> mEnemyPositions;
+    private GameObject enemySpawner;
     private Vector3 mMovementVector;
+    private Vector3 mDestinationVector;
     private bool mIsMoving;
     private Map mGameMap;
 
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        enemySpawner = GameObject.Find("EnemySpawner");
         mGameMap = FindObjectOfType<Map>();
         pMovementDuration = 0.1f;
         mIsMoving = false;
@@ -153,11 +157,12 @@ public class PlayerMovement : MonoBehaviour
             if ((mMovementVector.x == 0 && mMovementVector.y != 0)
                 || (mMovementVector.x != 0 && mMovementVector.y == 0))
             {
-                if (mGameMap.canPass(transform.localPosition + mMovementVector))
-                {
+                mDestinationVector = transform.localPosition + mMovementVector;
 
+                if (mGameMap.canPass(mDestinationVector) && !isEnemyThere())
+                {
                     mIsMoving = true;
-                    StartCoroutine(MovePlayer(transform.localPosition, transform.localPosition + mMovementVector, pMovementDuration));
+                    StartCoroutine(MovePlayer(transform.localPosition, mDestinationVector, pMovementDuration));
                     ChangePlayerFacing();
                 }
                 else
@@ -240,5 +245,18 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private bool isEnemyThere()
+    {
+        foreach (Transform child in enemySpawner.transform)
+        {
+            if (child.gameObject.transform.position == mDestinationVector)
+            {
+                child.GetComponent<EnemyAI>().Alert();
+                return true;
+            }
+        }
+        return false;
     }
 }

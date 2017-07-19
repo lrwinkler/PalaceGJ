@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     public float movementDelay = 1;
     public float steps = 10;
     public float stepDuration = 0.001f;
+    public Vector3 destinationVector;
 
     private Vector3 currentDirection;
     private Vector3 currentEnemyPosition;
@@ -14,6 +15,8 @@ public class EnemyAI : MonoBehaviour
     private Vector3 currentPlayerPosition;
     private Map gameMap;
     private float moveStep;
+
+    private bool isPetrified;
 
     public enum facingDirection { up, down, left, right };
     private facingDirection mNextFacingDirection;
@@ -48,12 +51,13 @@ public class EnemyAI : MonoBehaviour
     {
         currentEnemyPosition = transform.position;
         currentPlayerPosition = player.transform.position;
-        //animator.SetBool("isAttacking", false);
-        animator.SetBool("finishedAttacking", false);
+        animator.SetBool("isAttacking", false);
+        //animator.SetBool("finishedAttacking", false);
         animator.SetBool("facingUp", false);
         animator.SetBool("facingDown", false);
         animator.SetBool("facingLeft", false);
         animator.SetBool("facingRight", false);
+        animator.SetBool("isAlerted", true);
 
         timer += Time.deltaTime;
 
@@ -92,24 +96,47 @@ public class EnemyAI : MonoBehaviour
         //Move if it's free tile.
         if (gameMap != null)
         {
-            if (gameMap.canPass(new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z)))
+            destinationVector = new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z);
+            if (gameMap.canPass(destinationVector))
             {
-                if (currentDirection.x == 1)
-                    mNextFacingDirection = facingDirection.right;
-                else if (currentDirection.x == -1)
-                    mNextFacingDirection = facingDirection.left;
-                else if (currentDirection.y == 1)
-                    mNextFacingDirection = facingDirection.up;
-                else if (currentDirection.y == -1)
-                    mNextFacingDirection = facingDirection.down;
-                ChangePlayerFacing();
-                Vector3 newDirection = new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z);
-                Vector3 oldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                for (int i = 0; i <= steps; i++)
+                if (!isBlockedByEnemy())
                 {
-                    //Debug.Log(oldPosition);
-                    transform.position = Vector3.Lerp(oldPosition, newDirection, moveStep * i);
-                    yield return new WaitForSeconds(stepDuration);
+                    if (!isBlockedByPlayer())
+                    {
+                        if (currentDirection.x == 1)
+                            mNextFacingDirection = facingDirection.right;
+                        else if (currentDirection.x == -1)
+                            mNextFacingDirection = facingDirection.left;
+                        else if (currentDirection.y == 1)
+                            mNextFacingDirection = facingDirection.up;
+                        else if (currentDirection.y == -1)
+                            mNextFacingDirection = facingDirection.down;
+                        ChangeEnemyFacing();
+                        Vector3 newDirection = new Vector3(transform.position.x + currentDirection.x, transform.position.y + currentDirection.y, transform.position.z);
+                        Vector3 oldPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                        for (int i = 0; i <= steps; i++)
+                        {
+                            //Debug.Log(oldPosition);
+                            transform.position = Vector3.Lerp(oldPosition, newDirection, moveStep * i);
+                            yield return new WaitForSeconds(stepDuration);
+                        }
+                    }
+                    else
+                    {
+                        if (currentDirection.x == 1)
+                            mNextFacingDirection = facingDirection.right;
+                        else if (currentDirection.x == -1)
+                            mNextFacingDirection = facingDirection.left;
+                        else if (currentDirection.y == 1)
+                            mNextFacingDirection = facingDirection.up;
+                        else if (currentDirection.y == -1)
+                            mNextFacingDirection = facingDirection.down;
+                        ChangeEnemyFacing();
+                    }
+                }
+                else
+                {
+                    MoveEnemy();
                 }
             }
             else
@@ -120,7 +147,7 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
-    void ChangePlayerFacing()
+    void ChangeEnemyFacing()
     {
         if (horizontalAnimationChild != null && upAnimationChild != null && downAnimationChild != null)
         {
@@ -214,6 +241,26 @@ public class EnemyAI : MonoBehaviour
             animationState = "Soldier_walk_down";
         }
 
+        if (animationInfo.IsName("Soldier_attack_down"))
+        {
+            animationState = "Soldier_attack_down";
+        }
+
+        if (animationInfo.IsName("Soldier_attack_left"))
+        {
+            animationState = "Soldier_attack_left";
+        }
+
+        if (animationInfo.IsName("Soldier_attack_right"))
+        {
+            animationState = "Soldier_attack_right";
+        }
+
+        if (animationInfo.IsName("Soldier_attack_up"))
+        {
+            animationState = "Soldier_attack_up";
+        }
+
         Debug.Log(animationState);
 
         float animationFrame = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
@@ -223,17 +270,19 @@ public class EnemyAI : MonoBehaviour
         myAudio.Play();
         transform.localScale = Vector3.zero;
         Destroy(gameObject, myAudio.clip.length);
+        isPetrified = true;
+        transform.GetComponent<EnemyAI>().enabled = false;
         //display statue
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+/*    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerWinLoose>().Die(false);
         }
 
-    }
+    }*/
 
     void AttackFinish()
     {
@@ -242,28 +291,44 @@ public class EnemyAI : MonoBehaviour
             case facingDirection.down:
                 if (currentEnemyPosition + Vector3.down == currentPlayerPosition)
                 {
-                    player.GetComponent<PlayerWinLoose>().Die(false);
+                    if (!isPetrified)
+                    {
+                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        Debug.Log("SLAIN!");
+                    }
                 }
                 break;
 
             case facingDirection.up:
                 if (currentEnemyPosition + Vector3.up == currentPlayerPosition)
                 {
-                    player.GetComponent<PlayerWinLoose>().Die(false);
+                    if (!isPetrified)
+                    {
+                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        Debug.Log("SLAIN!");
+                    }
                 }
                 break;
 
             case facingDirection.left:
                 if (currentEnemyPosition + Vector3.left == currentPlayerPosition)
                 {
-                    player.GetComponent<PlayerWinLoose>().Die(false);
+                    if (!isPetrified)
+                    {
+                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        Debug.Log("SLAIN!");
+                    }
                 }
                 break;
 
             case facingDirection.right:
                 if (currentEnemyPosition + Vector3.right == currentPlayerPosition)
                 {
-                    player.GetComponent<PlayerWinLoose>().Die(false);
+                    if (!isPetrified)
+                    {
+                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        Debug.Log("SLAIN!");
+                    }
                 }
                 break;
         }
@@ -290,6 +355,39 @@ public class EnemyAI : MonoBehaviour
             case facingDirection.right:
                 animator.SetBool("facingRight", true);
                 break;
+        }
+    }
+
+    public void Alert()
+    {
+        animator.SetBool("isAlerted", true);
+        //TODO: A* pathfinding to player
+    }
+
+    private bool isBlockedByEnemy()
+    {
+        foreach (Transform child in GameObject.Find("EnemySpawner").transform)
+        {
+            if (child != transform)
+            {
+                if (destinationVector == child.GetComponent<EnemyAI>().destinationVector)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private bool isBlockedByPlayer()
+    {
+        if (destinationVector == player.transform.position)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

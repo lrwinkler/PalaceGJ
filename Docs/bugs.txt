@@ -9,8 +9,18 @@ FIXED Game Over doesn't take control away from player, can still "Win" after dyi
 
 FIXED Enemies sometimes spawn on top of the player if he moves while the YOU WIN message is displayed, resulting in instant death. (probably going to be fixed when selling screen is implemented)
 
-Enemy can spawn very close to player at beginning, making death very likely
+FIXED Player can walk into enemy while petrifying him, resulting in the player and the newly created statue overlapping.
 
-Enemies can spawn on top of each other and sometimes stack.
+FIXED If an enemy gets petrified during attack animation, the player still dies.
 
-Player can walk into enemy while petrifying him, resulting in the player and the newly created statue overlapping.
+FIXED Enemies can spawn on top of each other and walk into each other. They sometimes stack.
+
+Attack animations don't transition into move animations properly if facing doesn't change.
+
+Attack animations don't stop when player is dead.
+
+Enemy can spawn very close to player at beginning, making death very likely.
+
+Enemies can spawn in locked off areas making finishing a wave impossible. (bug or feature?)
+
+Player can walk into enemy sprite when moving into an area that's the target destination of the enemy. (movement at the same moment as the enemy)

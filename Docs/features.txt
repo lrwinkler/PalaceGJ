@@ -5,7 +5,7 @@ DONE Game Over when blocked in completely.
 
 DONE Change enemy death sound to one more fitting petrification.
 
-Add enemy attack animation.
+DONE Add enemy attacks.
 
 DONE Change statue to reflect enemy animation during petrification
 
@@ -13,8 +13,10 @@ Change scoring system to match animation frame.
 
 Selling of statues after each wave and auction screen.
 
-Artwork: menu, splash, gameover(enemy attack), gameover(starvation).
-
 Enemy AI switches to following when player is spotted
 
 Add the ability to draw attention of nearby enemies.
+
+Artwork: menu, splash, gameover(enemy attack), gameover(starvation), animations, statue auction.
+
+

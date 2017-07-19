@@ -6,8 +6,9 @@ public class EnemyGenerator : MonoBehaviour {
 	public int startNumberOfEnemies = 3;
 	public int howManyToAdd = 1;
 	public GameObject enemyPref;
+    GameObject newEnemy;
 
-	private Map gameMap;
+    private Map gameMap;
 	private Transform playerTransform;
 	public int numOfEnemiesToSpawn;
 	private int maxMapWidth;
@@ -24,9 +25,8 @@ public class EnemyGenerator : MonoBehaviour {
 
 	public void SpawnEnemies(int howMany)
 	{
-		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
-		GameObject newEnemy;
 		for(int i = 0; i < howMany; i++)
 		{
 			Vector3 newPosition = RandomizePosition();
@@ -38,10 +38,19 @@ public class EnemyGenerator : MonoBehaviour {
 	{
 		Vector3 newPosition = new Vector3(Random.Range(1, maxMapWidth - 1), Random.Range(1, maxMapHeight - 1), transform.position.z);
 
-		if(gameMap.canPass(newPosition) && newPosition.Equals(playerTransform.position) == false)
-			return newPosition;
-		else
-			return RandomizePosition();
+        if (gameMap.canPass(newPosition) && newPosition.Equals(playerTransform.position) == false)
+        {
+            foreach (Transform child in GameObject.Find("EnemySpawner").transform)
+            {
+                if (newPosition == child.position && newEnemy != child.gameObject)
+                {
+                    return RandomizePosition();
+                }
+            }
+            return newPosition;
+        }
+        else
+            return RandomizePosition();
 	}
 
 	
