@@ -24,3 +24,5 @@ Enemy can spawn very close to player at beginning, making death very likely.
 Enemies can spawn in locked off areas making finishing a wave impossible. (bug or feature?)
 
 Player can walk into enemy sprite when moving into an area that's the target destination of the enemy. (movement at the same moment as the enemy)
+
+Alert animation doesn't play when enemy is alerted.

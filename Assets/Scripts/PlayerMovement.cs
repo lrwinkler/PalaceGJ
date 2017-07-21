@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     //public Sprite pPlayerLeft;
     public float audioPitchRange = 0.5f;
 
-    private List<Vector3> mEnemyPositions;
     private GameObject enemySpawner;
     private Vector3 mMovementVector;
     private Vector3 mDestinationVector;
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         switch (mPlayerFacing)
         {
             case facingDirection.down:
-                RaycastHit2D hitDown = Physics2D.Raycast(transform.localPosition, Vector2.down);
+                RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down);
                 //Debug.Log(hitDown.collider.name);
                 if (hitDown.collider.name == "Soldier(Clone)")
                 {
@@ -77,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case facingDirection.up:
-                RaycastHit2D hitUp = Physics2D.Raycast(transform.localPosition, Vector2.up);
+                RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up);
                 //Debug.Log(hitUp.collider.name);
                 if (hitUp.collider.name == "Soldier(Clone)")
                 {
@@ -93,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case facingDirection.left:
-                RaycastHit2D hitLeft = Physics2D.Raycast(transform.localPosition, Vector2.left);
+                RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left);
                 //Debug.Log(hitLeft.collider.name);
                 if (hitLeft.collider.name == "Soldier(Clone)")
                 {
@@ -109,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case facingDirection.right:
-                RaycastHit2D hitRight = Physics2D.Raycast(transform.localPosition, Vector2.right);
+                RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right);
                 //Debug.Log(hitRight.collider.name);
                 if (hitRight.collider.name == "Soldier(Clone)")
                 {

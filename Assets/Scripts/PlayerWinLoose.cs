@@ -24,6 +24,7 @@ public class PlayerWinLoose : MonoBehaviour
     private Animator medusaAnimator;
     private Pathfinding pathfinding;
     private SelectorControl selectorControl;
+    public bool isDead;
 
     // Use this for initialization
     void Start()
@@ -46,6 +47,8 @@ public class PlayerWinLoose : MonoBehaviour
 
     IEnumerator DieDie(bool starved)
     {
+        isDead = true;
+
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
         GameObject.Find("Medusa").GetComponent<BoxCollider2D>().enabled = false;
 

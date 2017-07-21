@@ -29,9 +29,10 @@ public class EnemyAI : MonoBehaviour
     private Transform horizontalAnimationChild;
     private Transform upAnimationChild;
     private Transform downAnimationChild;
-
+    private bool isAlerted;
     private float timer;
-    // Use this for initialization
+
+
     void Start()
     {
         timer = 1;
@@ -52,12 +53,21 @@ public class EnemyAI : MonoBehaviour
         currentEnemyPosition = transform.position;
         currentPlayerPosition = player.transform.position;
         animator.SetBool("isAttacking", false);
-        //animator.SetBool("finishedAttacking", false);
         animator.SetBool("facingUp", false);
         animator.SetBool("facingDown", false);
         animator.SetBool("facingLeft", false);
         animator.SetBool("facingRight", false);
-        animator.SetBool("isAlerted", true);
+        animator.SetBool("isAlerted", false);
+
+        if (GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead)
+        {
+            isAlerted = false;
+        }
+
+        if (isAlerted)
+        {
+            transform.GetComponent<EnemyPathfinding>().FindPath();
+        }
 
         timer += Time.deltaTime;
 
@@ -79,6 +89,52 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        switch (pEnemyFacing)
+        {
+            case facingDirection.down:
+                RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0,0,-1), Vector2.down);
+                //Debug.Log(hitDown.collider.name);
+                if (hitDown.collider.name == "Medusa")
+                {
+                    Alert();
+                    //Debug.Log("Spotted!");
+                }
+                break;
+
+            case facingDirection.up:
+                RaycastHit2D hitUp = Physics2D.Raycast(transform.position + new Vector3(0, 0, -1), Vector2.up);
+                //Debug.Log(hitUp.collider.name);
+                if (hitUp.collider.name == "Medusa")
+                {
+                    Alert();
+                    //Debug.Log("Spotted!");
+                }
+                break;
+
+            case facingDirection.left:
+                RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(0, 0, -1), Vector2.left);
+                //Debug.Log(hitLeft.collider.name);
+                if (hitLeft.collider.name == "Medusa")
+                {
+                    Alert();
+                    //Debug.Log("Spotted!");
+                }
+                break;
+
+            case facingDirection.right:
+                RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(0, 0, -1), Vector2.right);
+                //Debug.Log(hitRight.collider.name);
+                if (hitRight.collider.name == "Medusa")
+                {
+                    Alert();
+                    //Debug.Log("Spotted!");
+                }
+                break;
+        }
+    }
+
     void MoveEnemy()
     {
         StartCoroutine(LerpEnemy());
@@ -86,8 +142,14 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator LerpEnemy()
     {
-        currentDirection = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
-
+        if (isAlerted)
+        {
+            currentDirection = transform.GetComponent<EnemyPathfinding>().nextStep;
+        }
+        else
+        {
+            currentDirection = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
+        }
         //No movement in both axis at once!!
         if (currentDirection.x != 0 && currentDirection.y != 0)
         {
@@ -136,7 +198,7 @@ public class EnemyAI : MonoBehaviour
                 }
                 else
                 {
-                    MoveEnemy();
+                    yield return new WaitForSeconds(0);                    
                 }
             }
             else
@@ -261,10 +323,10 @@ public class EnemyAI : MonoBehaviour
             animationState = "Soldier_attack_up";
         }
 
-        Debug.Log(animationState);
+        //Debug.Log(animationState);
 
         float animationFrame = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
-        Debug.Log(animationState);
+        //Debug.Log(animationState);
 
         gameMap.spawnStatue(1, enemyCoords, animationFrame, animationState);
         myAudio.Play();
@@ -272,17 +334,7 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject, myAudio.clip.length);
         isPetrified = true;
         transform.GetComponent<EnemyAI>().enabled = false;
-        //display statue
     }
-
-/*    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            other.GetComponent<PlayerWinLoose>().Die(false);
-        }
-
-    }*/
 
     void AttackFinish()
     {
@@ -360,8 +412,11 @@ public class EnemyAI : MonoBehaviour
 
     public void Alert()
     {
-        animator.SetBool("isAlerted", true);
-        //TODO: A* pathfinding to player
+        if (!GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead && !isAlerted)
+        {
+            animator.SetBool("isAlerted", true);
+            isAlerted = true;
+        }     
     }
 
     private bool isBlockedByEnemy()
