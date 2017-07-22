@@ -26,3 +26,5 @@ Enemies can spawn in locked off areas making finishing a wave impossible. (bug o
 Player can walk into enemy sprite when moving into an area that's the target destination of the enemy. (movement at the same moment as the enemy)
 
 Alert animation doesn't play when enemy is alerted.
+
+When enemy is alerted and following another, when the one in front is petrified the one following will step into the created statue.

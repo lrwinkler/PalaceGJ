@@ -151,6 +151,11 @@ public class PlayerMovement : MonoBehaviour
                 mMovementVector = (Vector3.down);
                 mNextFacingDirection = facingDirection.down;
             }
+            if (Input.GetKey("space"))
+            {
+                Hiss();
+                return;
+            }
 
             // Checks if mMovementVector doesn't imply diagonal movement, checks if tile moved to is passable terrain, then starts moving the player.
             if ((mMovementVector.x == 0 && mMovementVector.y != 0)
@@ -252,10 +257,31 @@ public class PlayerMovement : MonoBehaviour
         {
             if (child.gameObject.transform.position == mDestinationVector)
             {
-                child.GetComponent<EnemyAI>().Alert();
+                child.GetComponent<EnemyAI>().Alert(false);
                 return true;
             }
         }
         return false;
+    }
+
+    private void Hiss()
+    {
+        Vector3 playerPosition = transform.position;
+        playerPosition.x = Mathf.RoundToInt(playerPosition.x);
+        playerPosition.y = Mathf.RoundToInt(playerPosition.y);
+        ContactFilter2D contactFilter = new ContactFilter2D();
+
+        Collider2D[] area = new Collider2D[enemySpawner.transform.childCount];
+
+
+        Physics2D.OverlapArea(new Vector2(playerPosition.x - 2, playerPosition.y + 2), new Vector2(playerPosition.x + 2, playerPosition.y - 2), contactFilter, area);
+
+        foreach(Transform child in enemySpawner.transform)
+        {
+            if (((IList<Collider2D>)area).Contains(child.GetComponent<Collider2D>()))
+            {
+                child.GetComponent<EnemyAI>().Alert(true);
+            }
+        }
     }
 }

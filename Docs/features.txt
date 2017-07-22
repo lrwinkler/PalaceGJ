@@ -21,4 +21,4 @@ Add alert and frightened animations for enemies, hiss animation and sound for me
 
 Artwork: menu, splash, gameover(enemy attack), gameover(starvation), animations, statue auction.
 
-
+Consider switching to A* as enemy pathfinding algorithm for efficiency

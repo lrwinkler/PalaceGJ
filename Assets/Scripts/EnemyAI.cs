@@ -32,7 +32,8 @@ public class EnemyAI : MonoBehaviour
     private bool isAlerted;
     private float timer;
 
-
+    private List<Vector3> nextTo = new List<Vector3>();
+    
     void Start()
     {
         timer = 1;
@@ -46,6 +47,11 @@ public class EnemyAI : MonoBehaviour
         upAnimationChild = transform.Find("UpAnimation");
         downAnimationChild = transform.Find("DownAnimation");
         player = GameObject.Find("Medusa");
+
+        nextTo.Add(Vector3.down);
+        nextTo.Add(Vector3.up);
+        nextTo.Add(Vector3.left);
+        nextTo.Add(Vector3.right);
     }
 
     private void Update()
@@ -98,7 +104,7 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log(hitDown.collider.name);
                 if (hitDown.collider.name == "Medusa")
                 {
-                    Alert();
+                    Alert(false);
                     //Debug.Log("Spotted!");
                 }
                 break;
@@ -108,7 +114,7 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log(hitUp.collider.name);
                 if (hitUp.collider.name == "Medusa")
                 {
-                    Alert();
+                    Alert(false);
                     //Debug.Log("Spotted!");
                 }
                 break;
@@ -118,7 +124,7 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log(hitLeft.collider.name);
                 if (hitLeft.collider.name == "Medusa")
                 {
-                    Alert();
+                    Alert(false);
                     //Debug.Log("Spotted!");
                 }
                 break;
@@ -128,7 +134,7 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log(hitRight.collider.name);
                 if (hitRight.collider.name == "Medusa")
                 {
-                    Alert();
+                    Alert(false);
                     //Debug.Log("Spotted!");
                 }
                 break;
@@ -410,9 +416,24 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void Alert()
+    public void Alert(bool isFrightened)
     {
-        if (!GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead && !isAlerted)
+        Vector3 enemyPosition = transform.position;
+        enemyPosition.x = Mathf.RoundToInt(enemyPosition.x);
+        enemyPosition.y = Mathf.RoundToInt(enemyPosition.y);
+        enemyPosition.z = 0;
+
+        Vector3 playerPosition = GameObject.Find("Medusa").transform.position;
+        playerPosition.x = Mathf.RoundToInt(playerPosition.x);
+        playerPosition.y = Mathf.RoundToInt(playerPosition.y);
+        playerPosition.z = 0;
+
+        if (isFrightened && !isAlerted && (nextTo.Contains(enemyPosition - playerPosition) || nextTo.Contains(playerPosition - enemyPosition)))
+        {
+            animator.SetBool("isFrightened", true);
+            isAlerted = true;
+        }
+        else if (!GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead && !isAlerted)
         {
             animator.SetBool("isAlerted", true);
             isAlerted = true;
