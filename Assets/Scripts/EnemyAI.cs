@@ -39,7 +39,6 @@ public class EnemyAI : MonoBehaviour
         timer = 1;
         moveStep = 1 / steps;
         gameMap = FindObjectOfType<Map>();
-        //InvokeRepeating("MoveEnemy", 0, movementDelay);
         pEnemyFacing = facingDirection.down;
         myAudio = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -77,12 +76,13 @@ public class EnemyAI : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (animator.GetBool("isAttacking") == false)
+        if (!animator.GetBool("isAttacking"))
         {
-            if ((currentEnemyPosition + Vector3.right == currentPlayerPosition && pEnemyFacing == facingDirection.right)
+            if (((currentEnemyPosition + Vector3.right == currentPlayerPosition && pEnemyFacing == facingDirection.right)
                 || (currentEnemyPosition + Vector3.up == currentPlayerPosition && pEnemyFacing == facingDirection.up)
                 || (currentEnemyPosition + Vector3.down == currentPlayerPosition && pEnemyFacing == facingDirection.down)
                 || (currentEnemyPosition + Vector3.left == currentPlayerPosition && pEnemyFacing == facingDirection.left))
+                && !player.GetComponent<PlayerWinLose>().isDead)                
             {
                 animator.SetBool("isAttacking", true);
             }
@@ -218,9 +218,7 @@ public class EnemyAI : MonoBehaviour
     void ChangeEnemyFacing()
     {
         if (horizontalAnimationChild != null && upAnimationChild != null && downAnimationChild != null)
-        {
-            if (pEnemyFacing != mNextFacingDirection)
-            {
+        {           
                 switch (mNextFacingDirection)
                 {
                     case facingDirection.up:
@@ -263,7 +261,6 @@ public class EnemyAI : MonoBehaviour
                         animator.SetBool("facingRight", true);
                         break;
                 }
-            }
         }
         else
         {

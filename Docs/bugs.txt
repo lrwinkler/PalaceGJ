@@ -15,18 +15,19 @@ FIXED If an enemy gets petrified during attack animation, the player still dies.
 
 FIXED Enemies can spawn on top of each other and walk into each other. They sometimes stack.
 
-Attack animations don't transition into move animations properly if facing doesn't change.
+FIXED Enemy can spawn very close to player, making death very likely.
 
-Attack animations don't stop when player is dead.
+FIXED Attack animations don't transition into move animations properly if facing doesn't change.
 
-Enemy can spawn very close to player at beginning, making death very likely.
+FIXED Attack animations don't stop when player is dead.
 
-Enemies can spawn in locked off areas making finishing a wave impossible. (bug or feature?)
+FIXED Selector movement during selling sometimes doesn't detect keypresses.
 
 Player can walk into enemy sprite when moving into an area that's the target destination of the enemy. (movement at the same moment as the enemy)
 
-Alert animation doesn't play when enemy is alerted.
+Alert animation doesn't play when enemy is alerted by seeing Medusa.
 
 When enemy is alerted and following another, when the one in front is petrified the one following will step into the created statue.
 
-Selector movement during selling sometimes doesn't detect keypresses
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enemies can spawn in locked off areas making finishing a wave impossible. (bug or feature?)

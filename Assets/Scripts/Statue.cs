@@ -56,7 +56,7 @@ public class Statue : MonoBehaviour {
             pNumOfStars = 3;
         }
 
-        Debug.Log(pNumOfStars + " " + pPointsWorth);
+        Debug.Log(pNumOfStars + " " + pPointsWorth + " " + animationTime);
     }
 
     public void DisplayStars()

@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     //private SpriteRenderer mSpriteRenderer;
 
+    private AudioSource[] sounds;
     private AudioSource myAudio;
+    private AudioSource myAudio2;
     private PlayerWinLose myWinLoose;
     private Animator mAnimator;
 
@@ -39,7 +41,10 @@ public class PlayerMovement : MonoBehaviour
 
         //mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        myAudio = GetComponent<AudioSource>();
+        sounds = GetComponents<AudioSource>();
+        myAudio = sounds[0];
+        myAudio2 = sounds[1];
+
         myWinLoose = GetComponent<PlayerWinLose>();
         mAnimator = GetComponent<Animator>();
         mAnimator.SetBool("IsDead", false);
@@ -151,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
                 mMovementVector = (Vector3.down);
                 mNextFacingDirection = facingDirection.down;
             }
-            if (Input.GetKey("space"))
+            if (Input.GetKeyDown("space"))
             {
                 Hiss();
                 return;
@@ -266,6 +271,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Hiss()
     {
+        myAudio2.Play();
+
         Vector3 playerPosition = transform.position;
         playerPosition.x = Mathf.RoundToInt(playerPosition.x);
         playerPosition.y = Mathf.RoundToInt(playerPosition.y);

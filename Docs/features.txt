@@ -17,9 +17,13 @@ DONE Change scoring system to match animation frame.
 
 DONE Selling of statues after each wave and auction screen.
 
-DONE Add alert and frightened animations for enemies, hiss animation and sound for hiss.
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Artwork: menu, splash, gameover(enemy attack), gameover(starvation), animations, statue auction.
 
 Consider switching to A* as enemy pathfinding algorithm for efficiency
+
+Add alert and frightened animations for enemies, hiss animation and sound for hiss.
+
+Add "how to play" to menu.
+
+Add highscores.

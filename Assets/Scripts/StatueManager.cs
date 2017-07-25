@@ -5,9 +5,6 @@ using UnityEngine;
 public class StatueManager : MonoBehaviour
 {
     public List<GameObject> statues = new List<GameObject>();
-
-    private Camera mainCamera;
-    private Transform cameraTransform;
 	
 	public void add(GameObject statue)
     {

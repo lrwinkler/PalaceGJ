@@ -12,6 +12,7 @@ public class PlayerWinLose : MonoBehaviour
     public Text textPoints;
     public CanvasGroup diedText;
     public Text gameOverText;
+    public Text statueText;
 
     //public int defaultPoint = 100;
     //public int proximityBonus = 50;
@@ -29,8 +30,6 @@ public class PlayerWinLose : MonoBehaviour
 
     private GameObject selector;
     private int positionInList = 0;
-    private float timer;
-
     private Map map;
 
     // Use this for initialization
@@ -42,18 +41,15 @@ public class PlayerWinLose : MonoBehaviour
         pathfinding = GameObject.Find("Medusa").GetComponent<Pathfinding>();
         statueManager = GameObject.Find("Map").GetComponent<StatueManager>();
         isSelling = false;
-        timer = 0;
         statuesSelected = new List<GameObject>();
+        isDead = false;
     }
 
     void Update()
     {
-        if (timer > 0.1f)
-        {
-            timer = 0;
             if (isSelling)
             {
-                if (Input.GetKey("left"))
+                if (Input.GetKeyDown("left"))
                 {
                     if (positionInList != 0)
                     {
@@ -66,7 +62,7 @@ public class PlayerWinLose : MonoBehaviour
                         positionInList = statueManager.statues.Count - 1;
                     }
                 }
-                if (Input.GetKey("right"))
+                if (Input.GetKeyDown("right"))
                 {
                     if (positionInList != statueManager.statues.Count - 1)
                     {
@@ -79,7 +75,7 @@ public class PlayerWinLose : MonoBehaviour
                         positionInList = 0;
                     }
                 }
-                if (Input.GetKey("space"))
+                if (Input.GetKeyDown("space"))
                 {
                     if (statueManager.statues[positionInList].GetComponent<Statue>().pIsSold)
                     {                        
@@ -99,7 +95,7 @@ public class PlayerWinLose : MonoBehaviour
                         }
                     }
                 }
-                if (Input.GetKey("return"))
+                if (Input.GetKeyDown("return"))
                 {
                     if (statuesSold == 2)
                     {
@@ -119,26 +115,25 @@ public class PlayerWinLose : MonoBehaviour
                         {
                             statue.GetComponent<Statue>().HideStars();
                         }
+                        GameObject.Find("Medusa").GetComponent<Animator>().speed = 1;
                         StartCoroutine(NextWave());
                     }
                 }
             }
-        }
-
-        timer += Time.deltaTime;
     }
 
     public void Die(bool starved)
     {
         //Show Death UI and wait for a moment
-
-        StartCoroutine(DieDie(starved));
+        if (!isDead)
+        {
+            StartCoroutine(DieDie(starved));
+        }
     }
 
     IEnumerator DieDie(bool starved)
     {
         isDead = true;
-
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
         GameObject.Find("Medusa").GetComponent<BoxCollider2D>().enabled = false;
 
@@ -164,11 +159,16 @@ public class PlayerWinLose : MonoBehaviour
         SceneManager.LoadScene("Level0");
     }
 
-    void Win()
+    IEnumerator Win()
     {
         GameObject.Find("Medusa").GetComponent<PlayerMovement>().enabled = false;
         GameObject.Find("Medusa").GetComponent<AudioSource>().mute = true;
         GameObject.Find("Medusa").GetComponent<Animator>().speed = 0;
+
+        statueText.enabled = true;
+        yield return new WaitForSeconds(2);
+        statueText.enabled = false;
+
         selector = Instantiate(Resources.Load<GameObject>("Selector"));
         selector.transform.position = statueManager.statues[positionInList].transform.position;
 
@@ -188,7 +188,7 @@ public class PlayerWinLose : MonoBehaviour
         if (enemiesPetrified >= enemyGen.numOfEnemiesToSpawn)
         {
             //Initiate scoring screen
-            Win();
+            StartCoroutine(Win());
         }
         else if (pathfinding.IsBlockedIn())
         {
