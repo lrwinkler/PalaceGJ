@@ -11,14 +11,15 @@ DONE Change statue to reflect enemy animation during petrification
 
 DONE Enemy AI switches to following when player is spotted
 
-Change scoring system to match animation frame.
+DONE Add the ability to draw attention of nearby enemies.
 
-Selling of statues after each wave and auction screen.
+DONE Change scoring system to match animation frame.
 
-Add the ability to draw attention of nearby enemies.
+DONE Selling of statues after each wave and auction screen.
 
-Add alert and frightened animations for enemies, hiss animation and sound for medusa.
+DONE Add alert and frightened animations for enemies, hiss animation and sound for hiss.
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Artwork: menu, splash, gameover(enemy attack), gameover(starvation), animations, statue auction.
 
 Consider switching to A* as enemy pathfinding algorithm for efficiency

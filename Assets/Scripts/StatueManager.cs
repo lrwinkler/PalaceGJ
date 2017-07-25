@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatueManager : MonoBehaviour
 {
-    List<GameObject> statues = new List<GameObject>();
+    public List<GameObject> statues = new List<GameObject>();
 
     private Camera mainCamera;
     private Transform cameraTransform;
@@ -25,11 +25,5 @@ public class StatueManager : MonoBehaviour
 			}
 		}
 	}
-
-    public void startDeletingSequence()
-    {
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        cameraTransform = mainCamera.transform;
-    }
 
 }

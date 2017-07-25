@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     //private SpriteRenderer mSpriteRenderer;
 
     private AudioSource myAudio;
-    private PlayerWinLoose myWinLoose;
+    private PlayerWinLose myWinLoose;
     private Animator mAnimator;
 
     // Use this for initialization
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         //mSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         myAudio = GetComponent<AudioSource>();
-        myWinLoose = GetComponent<PlayerWinLoose>();
+        myWinLoose = GetComponent<PlayerWinLose>();
         mAnimator = GetComponent<Animator>();
         mAnimator.SetBool("IsDead", false);
     }
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //Debug.Log(hitDown.collider.name + " contact below!");                        
                         hitDown.collider.GetComponent<EnemyAI>().Petrify();
-                        myWinLoose.Petrified(hitDown.distance);
+                        myWinLoose.Petrified();
                     }
                 }
                 break;
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //Debug.Log(hitUp.collider.name + " contact above!");                        
                         hitUp.collider.GetComponent<EnemyAI>().Petrify();
-                        myWinLoose.Petrified(hitUp.distance);
+                        myWinLoose.Petrified();
                     }
                 }
                 break;
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //Debug.Log(hitLeft.collider.name + " contact left!");                        
                         hitLeft.collider.GetComponent<EnemyAI>().Petrify();
-                        myWinLoose.Petrified(hitLeft.distance);
+                        myWinLoose.Petrified();
                     }
                 }
                 break;
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //Debug.Log(hitRight.collider.name + " contact right!");                        
                         hitRight.collider.GetComponent<EnemyAI>().Petrify();
-                        myWinLoose.Petrified(hitRight.distance);
+                        myWinLoose.Petrified();
                     }
                 }
                 break;

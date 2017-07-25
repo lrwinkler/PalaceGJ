@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         animator.SetBool("facingRight", false);
         animator.SetBool("isAlerted", false);
 
-        if (GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead)
+        if (GameObject.Find("Medusa").GetComponent<PlayerWinLose>().isDead)
         {
             isAlerted = false;
         }
@@ -329,6 +329,11 @@ public class EnemyAI : MonoBehaviour
             animationState = "Soldier_attack_up";
         }
 
+        if (animationInfo.IsName("Soldier_alert"))
+        {
+            animationState = "Soldier_alert";
+        }
+
         //Debug.Log(animationState);
 
         float animationFrame = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
@@ -351,7 +356,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (!isPetrified)
                     {
-                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        player.GetComponent<PlayerWinLose>().Die(false);
                         Debug.Log("SLAIN!");
                     }
                 }
@@ -362,7 +367,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (!isPetrified)
                     {
-                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        player.GetComponent<PlayerWinLose>().Die(false);
                         Debug.Log("SLAIN!");
                     }
                 }
@@ -373,7 +378,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (!isPetrified)
                     {
-                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        player.GetComponent<PlayerWinLose>().Die(false);
                         Debug.Log("SLAIN!");
                     }
                 }
@@ -384,7 +389,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (!isPetrified)
                     {
-                        player.GetComponent<PlayerWinLoose>().Die(false);
+                        player.GetComponent<PlayerWinLose>().Die(false);
                         Debug.Log("SLAIN!");
                     }
                 }
@@ -433,7 +438,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isFrightened", true);
             isAlerted = true;
         }
-        else if (!GameObject.Find("Medusa").GetComponent<PlayerWinLoose>().isDead && !isAlerted)
+        else if (!GameObject.Find("Medusa").GetComponent<PlayerWinLose>().isDead && !isAlerted)
         {
             animator.SetBool("isAlerted", true);
             isAlerted = true;

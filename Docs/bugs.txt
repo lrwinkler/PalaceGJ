@@ -28,3 +28,5 @@ Player can walk into enemy sprite when moving into an area that's the target des
 Alert animation doesn't play when enemy is alerted.
 
 When enemy is alerted and following another, when the one in front is petrified the one following will step into the created statue.
+
+Selector movement during selling sometimes doesn't detect keypresses

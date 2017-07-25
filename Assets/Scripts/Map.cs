@@ -75,15 +75,17 @@ public class Map : MonoBehaviour {
         return false;
     }
 
-    public void spawnStatue(int quality, Vector3 point, float animationFrame, string animationState)
+    public void spawnStatue(int quality, Vector3 point, float animationTime, string animationState)
     {
         GameObject statue = Instantiate(Resources.Load<GameObject>("Statue"), point, Quaternion.identity, this.transform);
 		mapBlueprint.SetPixel((int) point.x,(int) point.y, Color.green);
         manager.add(statue);
 
-        Animator statueAnimator = statue.GetComponent<Animator>();
+        statue.GetComponent<Statue>().SetData(animationState, animationTime);
 
-        statueAnimator.CrossFade(animationState, 0f, 0, animationFrame);
+        Animator statueAnimator = statue.GetComponent<Animator>();
+        
+        statueAnimator.CrossFade(animationState, 0f, 0, animationTime);
         statueAnimator.speed = 0;
 
         statueAnimator.SetBool("facingUp", false);
@@ -115,7 +117,7 @@ public class Map : MonoBehaviour {
 
     public void removeStatue(Vector3 point)
     {
-		mapBlueprint.SetPixel((int)point.x, (int)point.y, Color.yellow);
+		mapBlueprint.SetPixel((int)point.x, (int)point.y, aSpecialKindOfYellow);
 		manager.Remove(point);
     }
 }
