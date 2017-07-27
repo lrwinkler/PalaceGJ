@@ -26,4 +26,8 @@ Add alert and frightened animations for enemies, hiss animation and sound for hi
 
 Add "how to play" to menu.
 
-Add highscores.
+Add highscores to menu.
+
+Multiplayer mode.
+
+Consider switching from Vector3 coordinate based collision to tile-contains-object type of deal

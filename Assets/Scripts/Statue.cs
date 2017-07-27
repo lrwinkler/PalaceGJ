@@ -59,7 +59,7 @@ public class Statue : MonoBehaviour {
         {
             pNumOfStars = 4;
         }
-        else if (pPointsWorth > 1200)
+        else if (pPointsWorth >= 1200)
         {
             pNumOfStars = 5;
         }
