@@ -40,7 +40,7 @@ public class Statue : MonoBehaviour {
 
         if (mAnimationState == "Soldier_alert")
         {
-            pPointsWorth = 600;
+            pPointsWorth = 500;
         }
 
         if (pPointsWorth == 300)
@@ -51,9 +51,17 @@ public class Statue : MonoBehaviour {
         {
             pNumOfStars = 2;
         }
-        else if (pPointsWorth > 600)
+        else if (pPointsWorth >= 600 && pPointsWorth < 900)
         {
             pNumOfStars = 3;
+        }
+        else if (pPointsWorth >= 900 && pPointsWorth < 1200)
+        {
+            pNumOfStars = 4;
+        }
+        else if (pPointsWorth > 1200)
+        {
+            pNumOfStars = 5;
         }
 
         Debug.Log(pNumOfStars + " " + pPointsWorth + " " + animationTime);
@@ -74,6 +82,14 @@ public class Statue : MonoBehaviour {
             case 3:
                 transform.Find("ThreeStars").gameObject.SetActive(true);
                 break;
+
+            case 4:
+                transform.Find("FourStars").gameObject.SetActive(true);
+                break;
+
+            case 5:
+                transform.Find("FiveStars").gameObject.SetActive(true);
+                break;
         }
     }
 
@@ -91,6 +107,14 @@ public class Statue : MonoBehaviour {
 
             case 3:
                 transform.Find("ThreeStars").gameObject.SetActive(false);
+                break;
+
+            case 4:
+                transform.Find("FourStars").gameObject.SetActive(false);
+                break;
+
+            case 5:
+                transform.Find("FiveStars").gameObject.SetActive(false);
                 break;
         }
     }
